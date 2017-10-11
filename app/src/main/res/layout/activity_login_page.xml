@@ -46,6 +46,16 @@
         android:layout_below="@+id/editTextEmailLogin"
         android:layout_centerHorizontal="true" />
 
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/buttonSignInWithGoogleAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        tools:visibility="gone"
+        android:layout_marginTop="43dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/buttonLogin" />
+
     <Button
         android:id="@+id/buttonRegisterInLoginPage"
         android:layout_width="wrap_content"
