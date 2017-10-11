@@ -20,7 +20,6 @@ public class RegisterPageActivity extends AppCompatActivity {
     private EditText editTextEmailRegister;
     private EditText editTextPasswordRegister;
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
