@@ -10,6 +10,8 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,17 +21,56 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
+
+import cariteman.hans.Adapter.EventAdapter;
+import cariteman.hans.datamodel.EventModel;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private RecyclerView recyclerView;
+    private EventAdapter eventAdapter;
+    private ArrayList<EventModel> eventData = new ArrayList<EventModel>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
+
+        //DUMMY
+        EventModel eventModel1 = new EventModel();
+        eventModel1.setEventDate("2017");
+        eventModel1.setPhotoUrl("http://popspoken.com/wp-content/uploads/2015/01/download.jpeg");
+        eventModel1.setTitle("Taylor Swift World Tour");
+        eventData.add(eventModel1);
+
+        EventModel eventModel2 = new EventModel();
+        eventModel2.setEventDate("2017");
+        eventModel2.setPhotoUrl("https://www.airasia.com/cdn/aa-images/en-ID/blibli.jpg?sfvrsn=0");
+        eventModel2.setTitle("Blibli Starlight");
+        eventData.add(eventModel2);
+
+        EventModel eventModel3 = new EventModel();
+        eventModel3.setEventDate("2012");
+        eventModel3.setPhotoUrl("https://www.airasia.com/cdn/aa-images/en-ID/blibli.jpg?sfvrsn=0");
+        eventModel3.setTitle("Blibli Dot Com");
+        eventData.add(eventModel3);
+
+        //Dummy
+
+
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView = (RecyclerView)findViewById(R.id.recViewAllEvent);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(llm);
+        eventAdapter = new EventAdapter(eventData,getBaseContext());
+        recyclerView.setAdapter(eventAdapter);
+
 
         //Validasi check user isLogin Or Not
         mAuthListener = new FirebaseAuth.AuthStateListener() {

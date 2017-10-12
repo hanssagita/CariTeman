@@ -23,6 +23,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import cariteman.hans.datamodel.Member;
 
 public class LoginPageActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
@@ -34,6 +38,8 @@ public class LoginPageActivity extends AppCompatActivity implements GoogleApiCli
     private GoogleApiClient mGoogleApiClient;
     private SignInButton buttonSignInWithGoogleAccount;
     private static final int RC_SIGN_IN = 9001;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("members");
 
 
     @Override
@@ -139,8 +145,11 @@ public class LoginPageActivity extends AppCompatActivity implements GoogleApiCli
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             //TODO maybe will be call to backend to get fullname and username and save to session
-
                             FirebaseUser user = mAuth.getCurrentUser();
+                            Member member = new Member(user.getEmail());
+                            myRef.setValue(member);
+
+
                             startActivity(new Intent(LoginPageActivity.this,MainActivity.class));
                         } else {
                             // If sign in fails, display a message to the user.
