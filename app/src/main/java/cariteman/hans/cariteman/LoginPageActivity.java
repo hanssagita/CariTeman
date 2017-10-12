@@ -38,8 +38,8 @@ public class LoginPageActivity extends AppCompatActivity implements GoogleApiCli
     private GoogleApiClient mGoogleApiClient;
     private SignInButton buttonSignInWithGoogleAccount;
     private static final int RC_SIGN_IN = 9001;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("members");
+    private FirebaseDatabase mRootRef = FirebaseDatabase.getInstance();
+    private DatabaseReference mMemberRef = mRootRef.getReference().child("members");
 
 
     @Override
@@ -146,11 +146,15 @@ public class LoginPageActivity extends AppCompatActivity implements GoogleApiCli
                             // Sign in success, update UI with the signed-in user's information
                             //TODO maybe will be call to backend to get fullname and username and save to session
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Member member = new Member(user.getEmail());
-                            myRef.setValue(member);
-
-
-                            startActivity(new Intent(LoginPageActivity.this,MainActivity.class));
+                            Member member = new Member(user.getEmail(),"Unknown",user.getDisplayName(),user.getPhoneNumber());
+                            mMemberRef.child(mMemberRef.push().getKey()).setValue(member).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isComplete()){
+                                        startActivity(new Intent(LoginPageActivity.this,MainActivity.class));
+                                    }
+                                }
+                            });
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(LoginPageActivity.this, "Authentication failed.",

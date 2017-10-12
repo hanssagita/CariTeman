@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cariteman.hans.cariteman.DetailEventPageActivity">
+
+    <com.github.florent37.arclayout.ArcLayout
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        app:arc_cropDirection="cropOutside"
+        app:arc_height="50dp"
+        android:elevation="6dp"
+        android:id="@+id/arcLayout">
+
+        <ImageView
+            android:id="@+id/detailEventPosterImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_menu_gallery" />
+
+    </com.github.florent37.arclayout.ArcLayout>
+
+    <TextView
+        android:id="@+id/textViewDetailEventTitle"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_below="@+id/arcLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/textViewDetailEventDescription"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="TextView"
+        android:gravity="center"
+        android:layout_below="@+id/textViewDetailEventTitle"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
