@@ -16,31 +16,63 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#80000000"
+            android:background="#59000000"
             />
+
+        <TextView
+            android:id="@+id/eventCardHostedBy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hosted By Hans"
+            android:textColor="#fff"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="11dp" />
 
         <TextView
             android:id="@+id/eventCardTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
             android:text="Taylor Swift Tour"
             android:textColor="#fff"
             android:textSize="24dp"
-            android:padding="8dp"
-            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            />
+            android:layout_alignStart="@+id/eventCardHostedBy" />
+
+        <TextView
+            android:id="@+id/eventCardLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location"
+            android:textColor="#fff"
+            android:layout_marginTop="11dp"
+            android:layout_below="@+id/eventCardTitle"
+            android:layout_alignStart="@+id/eventCardTitle" />
+
 
         <TextView
             android:id="@+id/eventCardDate"
-            android:layout_below="@id/eventCardTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#fff"
             android:text="2017"
-            android:layout_centerHorizontal="true"/>
+            android:layout_marginTop="27dp"
+            android:layout_alignTop="@+id/eventCardLocation"
+            android:layout_alignStart="@+id/eventCardLocation" />
 
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/eventCardCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="30dp"
+        android:text="Category"
+        android:textColor="#fff"
+        android:layout_alignBottom="@+id/relativeMovieCard"
+        android:layout_alignParentEnd="true" />
+
 
 </RelativeLayout>

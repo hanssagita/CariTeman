@@ -8,6 +8,7 @@ import java.util.Date;
 
 public class EventModel {
     private String id;
+    private String hostedBy;
     private String category;
     private Date createDate;
     private String eventDate;
@@ -17,6 +18,14 @@ public class EventModel {
     private String location;
     private int quantityPeople;
     private String photoUrl;
+
+    public String getHostedBy() {
+        return hostedBy;
+    }
+
+    public void setHostedBy(String hostedBy) {
+        this.hostedBy = hostedBy;
+    }
 
     public String getEventDate() {
         return eventDate;
