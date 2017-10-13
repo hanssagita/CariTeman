@@ -105,6 +105,7 @@ public class LoginPageActivity extends AppCompatActivity implements GoogleApiCli
 
                             startActivity(new Intent(LoginPageActivity.this,
                                     MainActivity.class));
+                            finish();
 
                             if (!task.isSuccessful()) {
                                 Toast.makeText(LoginPageActivity.this,

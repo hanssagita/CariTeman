@@ -74,6 +74,7 @@ public class RegisterPageActivity extends AppCompatActivity {
                                             if(task.isComplete()){
                                                 startActivity(new Intent(RegisterPageActivity.this,
                                                         LoginPageActivity.class));
+                                                finish();
                                             }
                                         }
                                     });

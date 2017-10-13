@@ -3,9 +3,7 @@ package cariteman.hans.cariteman;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,7 +13,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,6 +22,7 @@ import java.util.ArrayList;
 
 import cariteman.hans.Adapter.EventAdapter;
 import cariteman.hans.datamodel.EventModel;
+import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,6 +31,7 @@ public class MainActivity extends AppCompatActivity
     private FirebaseAuth.AuthStateListener mAuthListener;
     private RecyclerView recyclerView;
     private EventAdapter eventAdapter;
+    private WaveSwipeRefreshLayout pullRefreshAllEvent;
     private ArrayList<EventModel> eventData = new ArrayList<EventModel>();
 
     @Override
@@ -46,18 +45,30 @@ public class MainActivity extends AppCompatActivity
         eventModel1.setEventDate("2017");
         eventModel1.setPhotoUrl("http://popspoken.com/wp-content/uploads/2015/01/download.jpeg");
         eventModel1.setTitle("Taylor Swift World Tour");
+        eventModel1.setHostedBy("Hosted By Taylor Swift");
+        eventModel1.setEventDate("Today at 19.45 PM");
+        eventModel1.setLocation("Graha Niaga Thamrin");
+        eventModel1.setCategory("Music");
         eventData.add(eventModel1);
 
         EventModel eventModel2 = new EventModel();
         eventModel2.setEventDate("2017");
-        eventModel2.setPhotoUrl("https://www.airasia.com/cdn/aa-images/en-ID/blibli.jpg?sfvrsn=0");
+        eventModel2.setPhotoUrl("https://c4ikmd.corednacdn.com/web_images/1129/merchant_1129.jpeg");
         eventModel2.setTitle("Blibli Starlight");
+        eventModel2.setHostedBy("Hosted By  Maroon 5");
+        eventModel2.setEventDate("Tommorow at 10.45 AM");
+        eventModel2.setLocation("Thamrin Residence");
+        eventModel2.setCategory("Music");
         eventData.add(eventModel2);
 
         EventModel eventModel3 = new EventModel();
         eventModel3.setEventDate("2012");
         eventModel3.setPhotoUrl("https://www.airasia.com/cdn/aa-images/en-ID/blibli.jpg?sfvrsn=0");
         eventModel3.setTitle("Blibli Dot Com");
+        eventModel3.setHostedBy("Hosted By Leher Diko Ilang");
+        eventModel3.setEventDate("Tommorow at 10.45 AM");
+        eventModel3.setLocation("Thamrin Residence");
+        eventModel3.setCategory("Eat");
         eventData.add(eventModel3);
 
         //Dummy
@@ -84,21 +95,30 @@ public class MainActivity extends AppCompatActivity
                     // User is signed out (will be punch out into login activity)
                     startActivity(new Intent(MainActivity.this,
                             LoginPageActivity.class));
+                    finish();
                 }
             }
         };
 
+        pullRefreshAllEvent = (WaveSwipeRefreshLayout)findViewById(R.id.pullRefreshAllEvent);
+        pullRefreshAllEvent.setOnRefreshListener(new WaveSwipeRefreshLayout.OnRefreshListener(){
+            @Override
+            public void onRefresh() {
+                pullRefreshAllEvent.setRefreshing(false);
+            }
+        });
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
