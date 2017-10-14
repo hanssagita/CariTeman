@@ -1,12 +1,14 @@
 package cariteman.hans.cariteman;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -40,6 +42,8 @@ public class LoginPageActivity extends AppCompatActivity implements GoogleApiCli
     private static final int RC_SIGN_IN = 9001;
     private FirebaseDatabase mRootRef = FirebaseDatabase.getInstance();
     private DatabaseReference mMemberRef = mRootRef.getReference().child("members");
+    private AnimationDrawable animationDrawable;
+    private RelativeLayout relativeLayout;
 
 
     @Override
@@ -47,18 +51,15 @@ public class LoginPageActivity extends AppCompatActivity implements GoogleApiCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
 
+        relativeLayout = (RelativeLayout)findViewById(R.id.relativeLayoutLoginPage);
+        animationDrawable =(AnimationDrawable)relativeLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(6000);
+        animationDrawable.setExitFadeDuration(3000);
+
         buttonLogin = (Button)findViewById(R.id.buttonLogin);
         editTextEmailLogin = (EditText)findViewById(R.id.editTextEmailLogin);
         editTextPasswordLogin = (EditText)findViewById(R.id.editTextPasswordLogin);
         buttonRegisterInLoginPage = (Button)findViewById(R.id.buttonRegisterInLoginPage);
-        buttonRegisterInLoginPage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginPageActivity.this,
-                        RegisterPageActivity.class));
-            }
-        });
-
         buttonSignInWithGoogleAccount = (SignInButton) findViewById(R.id.buttonSignInWithGoogleAccount);
         buttonSignInWithGoogleAccount.setSize(SignInButton.SIZE_STANDARD);
 
@@ -74,6 +75,13 @@ public class LoginPageActivity extends AppCompatActivity implements GoogleApiCli
 
         mAuth = FirebaseAuth.getInstance();
 
+        buttonRegisterInLoginPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginPageActivity.this,
+                        RegisterPageActivity.class));
+            }
+        });
 
         buttonSignInWithGoogleAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,5 +181,11 @@ public class LoginPageActivity extends AppCompatActivity implements GoogleApiCli
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Toast.makeText(LoginPageActivity.this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        animationDrawable.start();
     }
 }

@@ -3,11 +3,10 @@ package cariteman.hans.datamodel;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by hans.sagita on 12/10/2017.
+ * Created by HansSagita on 14/10/17.
  */
 
-public class EventModel {
-
+public class DetailEventModel {
 
     @SerializedName("eventId")
     private String eventId;
@@ -31,6 +30,8 @@ public class EventModel {
     private String hostedBy;
     @SerializedName("dateResponse")
     private String dateResponse;
+    @SerializedName("description")
+    private String description;
 
     public String getEventId() {
         return eventId;
@@ -121,5 +122,12 @@ public class EventModel {
         this.dateResponse = dateResponse;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
 }

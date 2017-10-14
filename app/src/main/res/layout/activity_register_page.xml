@@ -4,91 +4,161 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/relativeLayoutRegisterPage"
+    android:background="@drawable/animation_list"
     tools:context="cariteman.hans.cariteman.RegisterPageActivity">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:text="Register"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/registerPageLogo"
+        android:src="@drawable/logo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="60dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <EditText
-        android:id="@+id/editTextEmailRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true" />
 
-    <EditText
-        android:id="@+id/editTextPasswordRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:layout_below="@+id/editTextFullNameRegister"
-        android:layout_alignStart="@+id/editTextFullNameRegister" />
+    <android.support.design.widget.TextInputLayout
+        android:layout_below="@id/registerPageLogo"
+        android:id="@+id/textInputLayoutEmailRegister"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:id="@+id/editTextEmailRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:ems="10"
+            android:textSize="18sp"
+            android:padding="8dp"
+            android:background="@drawable/rounded_corner_edit_text"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:layout_centerHorizontal="true" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayoutPasswordRegister"
+        android:layout_below="@+id/textInputLayoutEmailRegister"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/editTextPasswordRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:padding="10dp"
+            android:textSize="18sp"
+            android:background="@drawable/rounded_corner_edit_text"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword"
+             />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayoutFullNameRegister"
+        android:layout_below="@+id/textInputLayoutPasswordRegister"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/editTextFullNameRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:padding="10dp"
+            android:textSize="18sp"
+            android:background="@drawable/rounded_corner_edit_text"
+            android:ems="10"
+            android:hint="Full Name"
+            android:inputType="textPersonName"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayoutAddressRegister"
+        android:layout_below="@id/textInputLayoutFullNameRegister"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/editTextAddressRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:padding="10dp"
+            android:textSize="18sp"
+            android:background="@drawable/rounded_corner_edit_text"
+            android:hint="Address"
+            android:inputType="textPostalAddress"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayoutPhoneNumberRegister"
+        android:layout_below="@+id/textInputLayoutAddressRegister"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/editTextPhoneNumberRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:ems="10"
+            android:textSize="18sp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:padding="10dp"
+            android:background="@drawable/rounded_corner_edit_text"
+            android:hint="Phone Number"
+            android:inputType="number"
+             />
+
+    </android.support.design.widget.TextInputLayout>
 
     <Button
+        android:layout_below="@+id/textInputLayoutPhoneNumberRegister"
         android:id="@+id/buttonRegister"
-        android:layout_width="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        android:textSize="17sp"
+        android:background="@drawable/rounded_corner_button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Register"
-        android:layout_below="@+id/editTextPhoneNumberRegister"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="48dp" />
+         />
 
-    <EditText
-        android:id="@+id/editTextFullNameRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:ems="10"
-        android:hint="Full Name"
-        android:inputType="textPersonName"
-        android:layout_below="@+id/editTextEmailRegister"
-        android:layout_alignStart="@+id/editTextEmailRegister" />
-
-    <EditText
-        android:id="@+id/editTextAddressRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Address"
-        android:inputType="textPostalAddress"
-        android:layout_below="@+id/editTextPasswordRegister"
-        android:layout_alignStart="@+id/editTextPasswordRegister"
-        android:layout_marginTop="11dp" />
-
-    <EditText
-        android:id="@+id/editTextPhoneNumberRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:ems="10"
-        android:hint="Phone Number"
-        android:inputType="number"
-        android:layout_below="@+id/editTextAddressRegister"
-        android:layout_alignStart="@+id/editTextAddressRegister" />
-
-        </RelativeLayout>
+    </RelativeLayout>
     </ScrollView>
+
+
+
 
 
 </RelativeLayout>

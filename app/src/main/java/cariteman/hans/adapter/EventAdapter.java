@@ -54,6 +54,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             public void onClick(View v) {
                 Intent intent = new Intent(context, DetailEventPageActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("eventId",oneEvent.getEventId());
                 context.startActivity(intent);
             }
         });

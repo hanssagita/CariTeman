@@ -1,5 +1,6 @@
 package cariteman.hans.rest;
 
+import cariteman.hans.response.DetailEventResponse;
 import cariteman.hans.response.EventResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -14,7 +15,7 @@ public interface ApiInterface {
     @GET("Event/getAllEvent")
     Call<EventResponse> getAllEvent();
 
-    @GET("Event/getEventById/{id}")
-    Call<EventResponse> getEventById(@Path("id") int id);
+    @GET("Event/detail/{id}")
+    Call<DetailEventResponse> getEventById(@Path("id") String id);
 
 }

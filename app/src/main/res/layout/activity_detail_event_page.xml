@@ -6,42 +6,115 @@
     android:layout_height="match_parent"
     tools:context="cariteman.hans.cariteman.DetailEventPageActivity">
 
-    <com.github.florent37.arclayout.ArcLayout
+
+    <ImageView
+        android:scaleType="fitXY"
+        android:id="@+id/detailEventPosterImage"
         android:layout_width="match_parent"
         android:layout_height="220dp"
-        app:arc_cropDirection="cropOutside"
-        app:arc_height="50dp"
-        android:elevation="6dp"
-        android:id="@+id/arcLayout">
+        android:layout_alignParentStart="true" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:background="#73000000"
+        />
 
-        <ImageView
-            android:id="@+id/detailEventPosterImage"
+        <TextView
+            android:id="@+id/textViewDetailEventTitle"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:textColor="@android:color/white"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="110dp" />
+
+        <LinearLayout
+            android:id="@+id/linearLayoutDetailTop"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_menu_gallery" />
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp"
+            android:layout_above="@+id/textViewDetailEventDescription"
+            android:layout_alignParentStart="true">
 
-    </com.github.florent37.arclayout.ArcLayout>
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageView
+                    android:background="@drawable/multiple_user"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    />
+                <TextView
+                    android:id="@+id/detailEventTotalPeople"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:text="8 Going"
+                    android:textColor="@android:color/white" />
 
-    <TextView
-        android:id="@+id/textViewDetailEventTitle"
-        android:textSize="20sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:layout_below="@+id/arcLayout"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    />
+
+                <TextView
+                    android:id="@+id/detailEventDateResponse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tuesday, October 10 At 22.00 PM"
+                    android:textColor="@android:color/white" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:background="@drawable/share_logo"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    />
+                <TextView
+                    android:text="Share"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:textColor="@android:color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+    </LinearLayout>
+
+
+
 
     <TextView
         android:id="@+id/textViewDetailEventDescription"
         android:textSize="16sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:text="TextView"
-        android:gravity="center"
-        android:layout_below="@+id/textViewDetailEventTitle"
-        android:layout_centerHorizontal="true" />
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:layout_below="@+id/detailEventPosterImage"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
