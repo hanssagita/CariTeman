@@ -24,7 +24,7 @@
             android:background="#99000000"
             />
 
-        <cariteman.hans.Tools.OstrichTextView
+        <cariteman.hans.tools.OstrichTextView
             android:id="@+id/eventCardHostedBy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
             android:layout_marginStart="14dp"
             android:layout_marginTop="11dp" />
 
-        <cariteman.hans.Tools.OstrichTextView
+        <cariteman.hans.tools.OstrichTextView
             android:id="@+id/eventCardTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
             android:layout_alignStart="@+id/eventCardHostedBy"
             android:layout_marginBottom="30dp" />
 
-        <cariteman.hans.Tools.OstrichTextView
+        <cariteman.hans.tools.OstrichTextView
             android:id="@+id/eventCardLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
             android:layout_alignStart="@+id/eventCardTitle" />
 
 
-        <cariteman.hans.Tools.OstrichTextView
+        <cariteman.hans.tools.OstrichTextView
             android:id="@+id/eventCardDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignStart="@+id/eventCardLocation"
             android:layout_marginBottom="10dp" />
-        <cariteman.hans.Tools.OstrichTextView
+        <cariteman.hans.tools.OstrichTextView
             android:id="@+id/eventCardCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

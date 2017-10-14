@@ -1,4 +1,4 @@
-package cariteman.hans.Adapter;
+package cariteman.hans.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
-import cariteman.hans.Tools.OstrichTextView;
+import cariteman.hans.tools.OstrichTextView;
 import cariteman.hans.cariteman.DetailEventPageActivity;
 import cariteman.hans.cariteman.R;
 import cariteman.hans.datamodel.EventModel;

@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
-import cariteman.hans.Adapter.EventAdapter;
+import cariteman.hans.adapter.EventAdapter;
 import cariteman.hans.datamodel.EventModel;
 import cariteman.hans.response.EventResponse;
 import cariteman.hans.rest.ApiClient;
