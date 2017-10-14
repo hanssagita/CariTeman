@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -18,11 +19,17 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import cariteman.hans.Adapter.EventAdapter;
 import cariteman.hans.datamodel.EventModel;
+import cariteman.hans.response.EventResponse;
+import cariteman.hans.rest.ApiClient;
+import cariteman.hans.rest.ApiInterface;
 import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,7 +39,7 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView recyclerView;
     private EventAdapter eventAdapter;
     private WaveSwipeRefreshLayout pullRefreshAllEvent;
-    private ArrayList<EventModel> eventData = new ArrayList<EventModel>();
+    private List<EventModel> eventData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,48 +47,13 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
 
-        //DUMMY
-        EventModel eventModel1 = new EventModel();
-        eventModel1.setEventDate("2017");
-        eventModel1.setPhotoUrl("http://popspoken.com/wp-content/uploads/2015/01/download.jpeg");
-        eventModel1.setTitle("Taylor Swift World Tour");
-        eventModel1.setHostedBy("Hosted By Taylor Swift");
-        eventModel1.setEventDate("Today at 19.45 PM");
-        eventModel1.setLocation("Graha Niaga Thamrin");
-        eventModel1.setCategory("Music");
-        eventData.add(eventModel1);
-
-        EventModel eventModel2 = new EventModel();
-        eventModel2.setEventDate("2017");
-        eventModel2.setPhotoUrl("https://c4ikmd.corednacdn.com/web_images/1129/merchant_1129.jpeg");
-        eventModel2.setTitle("Blibli Starlight");
-        eventModel2.setHostedBy("Hosted By  Maroon 5");
-        eventModel2.setEventDate("Tommorow at 10.45 AM");
-        eventModel2.setLocation("Thamrin Residence");
-        eventModel2.setCategory("Music");
-        eventData.add(eventModel2);
-
-        EventModel eventModel3 = new EventModel();
-        eventModel3.setEventDate("2012");
-        eventModel3.setPhotoUrl("https://www.airasia.com/cdn/aa-images/en-ID/blibli.jpg?sfvrsn=0");
-        eventModel3.setTitle("Blibli Dot Com");
-        eventModel3.setHostedBy("Hosted By Leher Diko Ilang");
-        eventModel3.setEventDate("Tommorow at 10.45 AM");
-        eventModel3.setLocation("Thamrin Residence");
-        eventModel3.setCategory("Eat");
-        eventData.add(eventModel3);
-
-        //Dummy
-
-
+        recyclerView = (RecyclerView)findViewById(R.id.recViewAllEvent);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView = (RecyclerView)findViewById(R.id.recViewAllEvent);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(llm);
-        eventAdapter = new EventAdapter(eventData,getBaseContext());
-        recyclerView.setAdapter(eventAdapter);
 
+        fetchAllEventData();
 
         //Validasi check user isLogin Or Not
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -104,7 +76,7 @@ public class MainActivity extends AppCompatActivity
         pullRefreshAllEvent.setOnRefreshListener(new WaveSwipeRefreshLayout.OnRefreshListener(){
             @Override
             public void onRefresh() {
-                pullRefreshAllEvent.setRefreshing(false);
+                fetchAllEventData();
             }
         });
 
@@ -201,5 +173,26 @@ public class MainActivity extends AppCompatActivity
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
+    }
+
+    private void fetchAllEventData(){
+        ApiInterface apiService =
+                ApiClient.getClient().create(ApiInterface.class);
+        Call<EventResponse> call = apiService.getAllEvent();
+        call.enqueue(new Callback<EventResponse>() {
+            @Override
+            public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
+                eventData = response.body().getResults();
+                eventAdapter = new EventAdapter(eventData,getBaseContext());
+                recyclerView.setAdapter(eventAdapter);
+                pullRefreshAllEvent.setRefreshing(false);
+            }
+
+            @Override
+            public void onFailure(Call<EventResponse> call, Throwable t) {
+                Log.e("Retrovit Error",t.toString());
+                System.out.println(t.toString());
+            }
+        });
     }
 }

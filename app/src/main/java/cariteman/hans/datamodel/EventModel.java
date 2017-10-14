@@ -1,46 +1,47 @@
 package cariteman.hans.datamodel;
 
-import java.util.Date;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by hans.sagita on 12/10/2017.
  */
 
 public class EventModel {
-    private String id;
-    private String hostedBy;
+
+
+    @SerializedName("eventId")
+    private String eventId;
+    @SerializedName("category")
     private String category;
-    private Date createDate;
-    private String eventDate;
+    @SerializedName("status")
     private String status;
-    private boolean isPrivate;
-    private String title;
+    @SerializedName("eventName")
+    private String eventName;
+    @SerializedName("location")
     private String location;
-    private int quantityPeople;
-    private String photoUrl;
+    @SerializedName("totalPeople")
+    private Integer totalPeople;
+    @SerializedName("quota")
+    private Integer quota;
+    @SerializedName("backgroundImg")
+    private Object backgroundImg;
+    @SerializedName("hostImg")
+    private Object hostImg;
+    @SerializedName("hostedBy")
+    private String hostedBy;
+    @SerializedName("dateResponse")
+    private String dateResponse;
+    @SerializedName("markForDelete")
+    private Boolean markForDelete;
+    @SerializedName("private")
+    private Boolean _private;
 
-    public String getHostedBy() {
-        return hostedBy;
+    public String getEventId() {
+        return eventId;
     }
 
-    public void setHostedBy(String hostedBy) {
-        this.hostedBy = hostedBy;
-    }
-
-    public String getEventDate() {
-        return eventDate;
-    }
-
-    public void setEventDate(String eventDate) {
-        this.eventDate = eventDate;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public void setEventId(String eventId) {
+        this.eventId = eventId;
     }
 
     public String getCategory() {
@@ -51,13 +52,6 @@ public class EventModel {
         this.category = category;
     }
 
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
 
     public String getStatus() {
         return status;
@@ -67,20 +61,12 @@ public class EventModel {
         this.status = status;
     }
 
-    public boolean isPrivate() {
-        return isPrivate;
+    public String getEventName() {
+        return eventName;
     }
 
-    public void setPrivate(boolean aPrivate) {
-        isPrivate = aPrivate;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 
     public String getLocation() {
@@ -91,19 +77,67 @@ public class EventModel {
         this.location = location;
     }
 
-    public int getQuantityPeople() {
-        return quantityPeople;
+    public Integer getTotalPeople() {
+        return totalPeople;
     }
 
-    public void setQuantityPeople(int quantityPeople) {
-        this.quantityPeople = quantityPeople;
+    public void setTotalPeople(Integer totalPeople) {
+        this.totalPeople = totalPeople;
     }
 
-    public String getPhotoUrl() {
-        return photoUrl;
+    public Integer getQuota() {
+        return quota;
     }
 
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
+    public void setQuota(Integer quota) {
+        this.quota = quota;
+    }
+
+    public Object getBackgroundImg() {
+        return backgroundImg;
+    }
+
+    public void setBackgroundImg(Object backgroundImg) {
+        this.backgroundImg = backgroundImg;
+    }
+
+    public Object getHostImg() {
+        return hostImg;
+    }
+
+    public void setHostImg(Object hostImg) {
+        this.hostImg = hostImg;
+    }
+
+    public String getHostedBy() {
+        return hostedBy;
+    }
+
+    public void setHostedBy(String hostedBy) {
+        this.hostedBy = hostedBy;
+    }
+
+    public String getDateResponse() {
+        return dateResponse;
+    }
+
+    public void setDateResponse(String dateResponse) {
+        this.dateResponse = dateResponse;
+    }
+
+    public Boolean getMarkForDelete() {
+        return markForDelete;
+    }
+
+    public void setMarkForDelete(Boolean markForDelete) {
+        this.markForDelete = markForDelete;
+    }
+
+    public Boolean getPrivate() {
+        return _private;
+    }
+
+    public void setPrivate(Boolean _private) {
+        this._private = _private;
     }
 }

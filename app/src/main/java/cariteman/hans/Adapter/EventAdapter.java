@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import cariteman.hans.Tools.OstrichTextView;
 import cariteman.hans.cariteman.DetailEventPageActivity;
@@ -24,10 +25,10 @@ import cariteman.hans.datamodel.EventModel;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
 
-    private ArrayList<EventModel> eventModel = new ArrayList<>();
+    private List<EventModel> eventModel = new ArrayList<>();
     Context context;
 
-    public EventAdapter(ArrayList<EventModel> eventModel, Context context){
+    public EventAdapter(List<EventModel> eventModel, Context context){
         this.eventModel = eventModel;
         this.context = context;
     }
@@ -42,12 +43,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final EventModel oneEvent = eventModel.get(position);
-        Glide.with(context).load(oneEvent.getPhotoUrl()).into(holder.eventCardImage);
-        holder.eventCardTitle.setText(oneEvent.getTitle());
+        Glide.with(context).load(oneEvent.getBackgroundImg()).into(holder.eventCardImage);
+        holder.eventCardTitle.setText(oneEvent.getEventName());
         holder.eventCardHostedBy.setText(oneEvent.getHostedBy());
         holder.eventCardLocation.setText(oneEvent.getLocation());
         holder.eventCardCategory.setText(oneEvent.getCategory());
-        holder.eventCardDate.setText(oneEvent.getEventDate().toString());
+        holder.eventCardDate.setText(oneEvent.getDateResponse().toString());
         holder.relativeEventCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

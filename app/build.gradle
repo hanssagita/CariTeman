@@ -36,6 +36,9 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:4.0.0'
     compile 'com.github.florent37:arclayout:1.0.2'
     compile 'com.github.recruit-lifestyle:WaveSwipeRefreshLayout:1.6'
+    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     testCompile 'junit:junit:4.12'
 }
 
