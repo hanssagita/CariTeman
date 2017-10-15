@@ -8,7 +8,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class EventModel {
 
-
     @SerializedName("eventId")
     private String eventId;
     @SerializedName("category")
@@ -120,6 +119,5 @@ public class EventModel {
     public void setDateResponse(String dateResponse) {
         this.dateResponse = dateResponse;
     }
-
 
 }

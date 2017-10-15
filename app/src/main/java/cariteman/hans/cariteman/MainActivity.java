@@ -16,8 +16,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.List;
 
@@ -26,6 +28,7 @@ import cariteman.hans.datamodel.EventModel;
 import cariteman.hans.response.EventResponse;
 import cariteman.hans.rest.ApiClient;
 import cariteman.hans.rest.ApiInterface;
+import io.fabric.sdk.android.Fabric;
 import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,8 +47,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
+
+        FirebaseMessaging.getInstance().subscribeToTopic("user");
 
         recyclerView = (RecyclerView)findViewById(R.id.recViewAllEvent);
         LinearLayoutManager llm = new LinearLayoutManager(this);
@@ -152,6 +158,10 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_logOut) {
             mAuth.signOut();
+        } else if (id == R.id.nav_create_event) {
+            startActivity(new Intent(MainActivity.this,
+                    CreateEventActivity.class));
+//            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

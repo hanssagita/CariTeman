@@ -1,5 +1,12 @@
 package cariteman.hans.cariteman;
 
+// Firebase Performance
+import com.google.firebase.perf.FirebasePerformance;
+import com.google.firebase.perf.metrics.Trace;
+
+import android.app.ProgressDialog;
+import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -11,6 +18,7 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -27,8 +35,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.crash.FirebaseCrash;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.perf.metrics.AddTrace;
 
 import cariteman.hans.datamodel.Member;
+import io.fabric.sdk.android.Fabric;
 
 public class LoginPageActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
@@ -45,11 +57,19 @@ public class LoginPageActivity extends AppCompatActivity implements GoogleApiCli
     private AnimationDrawable animationDrawable;
     private RelativeLayout relativeLayout;
 
-
     @Override
+    @AddTrace(name = "onCreateTrace", enabled = true/*Optional*/)
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_login_page);
+
+        // logUser();
+        // Trace myTrace = FirebasePerformance.getInstance().newTrace("test_trace");
+        // myTrace.start();
+
+        // Subscribe Topic Push Notification
+        FirebaseMessaging.getInstance().subscribeToTopic("user");
 
         relativeLayout = (RelativeLayout)findViewById(R.id.relativeLayoutLoginPage);
         animationDrawable =(AnimationDrawable)relativeLayout.getBackground();
@@ -98,6 +118,8 @@ public class LoginPageActivity extends AppCompatActivity implements GoogleApiCli
                 signInWithEmailAndPasswordBasic(email, password);
             }
         });
+
+        // myTrace.stop();
     }
 
     private void signInWithEmailAndPasswordBasic(String email,String password) {
@@ -188,4 +210,19 @@ public class LoginPageActivity extends AppCompatActivity implements GoogleApiCli
         super.onResume();
         animationDrawable.start();
     }
+
+    public void forceCrash(View view) {
+//        throw new RuntimeException("This is a crash aw");
+//        FirebaseCrash.report(new Exception("My first Android non-fatal error"));
+        Toast.makeText(LoginPageActivity.this, "Force Crash.", Toast.LENGTH_SHORT).show();
+    }
+//
+//    private void logUser() {
+//        // TODO: Use the current user's information
+//        // You can call any combination of these three methods
+//        Crashlytics.setUserIdentifier("12345");
+//        Crashlytics.setUserEmail("user@fabric.io");
+//        Crashlytics.setUserName("Test User");
+//    }
+
 }

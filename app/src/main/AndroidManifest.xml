@@ -33,6 +33,19 @@
         <activity android:name=".SplashScreenActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity
+            android:name=".CreateEventActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
+        <service android:name=".MyFirebaseMessagingService">
+            <intent-filter> 
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/> 
+            </intent-filter> 
+        </service>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="86b535ce1338e21510deabe4265d3a71ecc978b9" />
+        <meta-data android:name="firebase_performance_logcat_enabled" android:value="true" />
     </application>
 
 </manifest>

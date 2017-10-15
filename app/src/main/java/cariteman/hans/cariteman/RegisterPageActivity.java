@@ -30,7 +30,7 @@ public class RegisterPageActivity extends AppCompatActivity {
     private EditText editTextPhoneNumberRegister;
     private FirebaseAuth mAuth;
     private FirebaseDatabase mRootRef = FirebaseDatabase.getInstance();
-    private DatabaseReference mMemberRef = mRootRef.getReference().child("members");
+    private DatabaseReference mMemberRef = mRootRef.getReference().child("users");
     private String email;
     private String password;
     private String fullName;
@@ -100,6 +100,7 @@ public class RegisterPageActivity extends AppCompatActivity {
             }
         });
     }
+
     private String usernameFromEmail(String email) {
         if (email.contains("@")) {
             return email.split("@")[0];

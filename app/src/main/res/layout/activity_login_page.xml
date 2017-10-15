@@ -8,6 +8,13 @@
     android:background="@drawable/animation_list"
     tools:context="cariteman.hans.cariteman.LoginPageActivity">
 
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Force Crash!"
+        android:onClick="forceCrash"
+        android:layout_centerHorizontal="true" />
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
@@ -15,6 +22,7 @@
         android:layout_alignBottom="@+id/editTextEmailLogin"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="70dp"
+        android:textSize="24sp"
         android:text="Login" />
 
     <EditText
@@ -65,4 +73,5 @@
         android:text="Register Page"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
