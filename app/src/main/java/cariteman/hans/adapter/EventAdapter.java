@@ -45,9 +45,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         final EventModel oneEvent = eventModel.get(position);
         Glide.with(context).load(oneEvent.getBackgroundImg()).into(holder.eventCardImage);
         holder.eventCardTitle.setText(oneEvent.getEventName());
-        holder.eventCardHostedBy.setText(oneEvent.getHostedBy());
+        holder.eventCardHostedBy.setText("Hosted By " + oneEvent.getHostedBy());
         holder.eventCardLocation.setText(oneEvent.getLocation());
-        holder.eventCardCategory.setText(oneEvent.getCategory());
+        holder.eventCardCategory.setText(oneEvent.getCategory().toUpperCase());
         holder.eventCardDate.setText(oneEvent.getDateResponse().toString());
         holder.relativeEventCard.setOnClickListener(new View.OnClickListener() {
             @Override

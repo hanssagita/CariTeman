@@ -26,9 +26,9 @@
             android:layout_height="wrap_content"
             android:text="Title"
             android:textColor="@android:color/white"
-            android:layout_alignParentTop="true"
+            android:layout_above="@+id/linearLayoutDetailTop"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="110dp" />
+            android:layout_marginBottom="20dp" />
 
         <LinearLayout
             android:id="@+id/linearLayoutDetailTop"
@@ -36,52 +36,60 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
-            android:layout_marginBottom="20dp"
-            android:layout_above="@+id/textViewDetailEventDescription"
+            android:layout_marginBottom="5dp"
+            android:layout_above="@+id/linearLayoutCalendar"
             android:layout_alignParentStart="true">
 
             <LinearLayout
-                android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
                 <ImageView
-                    android:background="@drawable/multiple_user"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    />
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/multiple_user" />
+
                 <TextView
                     android:id="@+id/detailEventTotalPeople"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
                     android:text="8 Going"
                     android:textColor="@android:color/white" />
 
             </LinearLayout>
 
             <LinearLayout
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/four_black_squares"
                     />
 
                 <TextView
-                    android:id="@+id/detailEventDateResponse"
+                    android:id="@+id/detailEventCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tuesday, October 10 At 22.00 PM"
+                    android:text="Music"
                     android:textColor="@android:color/white" />
 
             </LinearLayout>
 
             <LinearLayout
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
                 android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -89,13 +97,13 @@
 
                 <ImageView
                     android:background="@drawable/share_logo"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     />
                 <TextView
                     android:text="Share"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
                     android:textColor="@android:color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -103,8 +111,49 @@
 
     </LinearLayout>
 
-
-
+    <LinearLayout
+        android:id="@+id/linearLayoutCalendar"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:layout_below="@id/detailEventPosterImage"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:padding="5dp"
+            android:layout_marginTop="1dp"
+            android:background="@drawable/calendar_and_clock_black"
+            android:layout_width="25dp"
+            android:layout_height="25dp" />
+        <TextView
+            android:id="@+id/detailEventDate"
+            android:padding="5dp"
+            android:text="Monday, November 9 at 10.30 PM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayoutLocation"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/linearLayoutCalendar"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:padding="5dp"
+            android:background="@drawable/placeholder"
+            android:layout_width="25dp"
+            android:layout_height="25dp" />
+        <TextView
+            android:id="@+id/detailEventLocation"
+            android:padding="5dp"
+            android:text="Graha Niaga Thamrin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textViewDetailEventDescription"
@@ -112,9 +161,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:layout_marginTop="10dp"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
-        android:layout_below="@+id/detailEventPosterImage"
+        android:layout_below="@+id/linearLayoutLocation"
         android:layout_alignParentStart="true" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recViewThreadInDetail"
+        android:layout_below="@+id/textViewDetailEventDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

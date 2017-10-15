@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/relativeLayoutRegisterPage"
     android:background="@drawable/animation_list"
+    android:id="@+id/relativeLayoutRegisterPage"
     tools:context="cariteman.hans.cariteman.RegisterPageActivity">
 
     <ScrollView
@@ -23,7 +23,6 @@
         android:layout_marginTop="60dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
-
 
     <android.support.design.widget.TextInputLayout
         android:layout_below="@id/registerPageLogo"
@@ -156,9 +155,4 @@
 
     </RelativeLayout>
     </ScrollView>
-
-
-
-
-
 </RelativeLayout>

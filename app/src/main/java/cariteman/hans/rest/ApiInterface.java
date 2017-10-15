@@ -18,4 +18,5 @@ public interface ApiInterface {
     @GET("Event/detail/{id}")
     Call<DetailEventResponse> getEventById(@Path("id") String id);
 
+
 }

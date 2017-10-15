@@ -23,6 +23,8 @@ public class DetailEventPageActivity extends AppCompatActivity {
     private TextView textViewDetailEventDescription;
     private TextView detailEventTotalPeople;
     private TextView detailEventCategory;
+    private TextView detailEventDate;
+    private TextView detailEventLocation;
     private String eventId;
     private DetailEventModel detailEventData;
     @Override
@@ -34,6 +36,8 @@ public class DetailEventPageActivity extends AppCompatActivity {
         textViewDetailEventDescription = (TextView)findViewById(R.id.textViewDetailEventDescription);
         detailEventTotalPeople = (TextView)findViewById(R.id.detailEventTotalPeople);
         detailEventCategory = (TextView)findViewById(R.id.detailEventCategory);
+        detailEventDate = (TextView)findViewById(R.id.detailEventDate);
+        detailEventLocation = (TextView)findViewById(R.id.detailEventLocation);
 
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
@@ -75,6 +79,8 @@ public class DetailEventPageActivity extends AppCompatActivity {
         textViewDetailEventTitle.setText(detailEventData.getEventName());
         textViewDetailEventDescription.setText(detailEventData.getDescription());
         detailEventTotalPeople.setText(detailEventData.getTotalPeople()+ " Going ");
-        detailEventCategory.setText(detailEventData.getCategory());
+        detailEventCategory.setText(detailEventData.getCategory().toUpperCase());
+        detailEventDate.setText(detailEventData.getDateResponse());
+        detailEventLocation.setText(detailEventData.getLocation());
     }
 }
