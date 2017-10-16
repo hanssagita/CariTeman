@@ -14,10 +14,10 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
-import cariteman.hans.tools.OstrichTextView;
 import cariteman.hans.cariteman.DetailEventPageActivity;
 import cariteman.hans.cariteman.R;
 import cariteman.hans.datamodel.EventModel;
+import cariteman.hans.tools.CaviarTextView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -74,21 +74,21 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView eventCardImage;
-        OstrichTextView eventCardTitle;
-        OstrichTextView eventCardDate;
-        OstrichTextView eventCardHostedBy;
-        OstrichTextView eventCardLocation;
-        OstrichTextView eventCardCategory;
+        CaviarTextView eventCardTitle;
+        CaviarTextView eventCardDate;
+        CaviarTextView eventCardHostedBy;
+        CaviarTextView eventCardLocation;
+        CaviarTextView eventCardCategory;
         RelativeLayout relativeEventCard;
         CircleImageView eventHostImg;
         public ViewHolder(View itemView) {
             super(itemView);
             eventCardImage = (ImageView)itemView.findViewById(R.id.eventCardImage);
-            eventCardTitle = (OstrichTextView)itemView.findViewById(R.id.eventCardTitle);
-            eventCardDate = (OstrichTextView)itemView.findViewById(R.id.eventCardDate);
-            eventCardHostedBy = (OstrichTextView)itemView.findViewById(R.id.eventCardHostedBy);
-            eventCardLocation = (OstrichTextView)itemView.findViewById(R.id.eventCardLocation);
-            eventCardCategory = (OstrichTextView)itemView.findViewById(R.id.eventCardCategory);
+            eventCardTitle = (CaviarTextView)itemView.findViewById(R.id.eventCardTitle);
+            eventCardDate = (CaviarTextView)itemView.findViewById(R.id.eventCardDate);
+            eventCardHostedBy = (CaviarTextView)itemView.findViewById(R.id.eventCardHostedBy);
+            eventCardLocation = (CaviarTextView)itemView.findViewById(R.id.eventCardLocation);
+            eventCardCategory = (CaviarTextView)itemView.findViewById(R.id.eventCardCategory);
             relativeEventCard = (RelativeLayout)itemView.findViewById(R.id.relativeEventCard);
             eventHostImg = (CircleImageView)itemView.findViewById(R.id.eventCardHostedImg);
         }

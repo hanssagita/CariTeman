@@ -1,90 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_margin="15dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="5dp"
     android:elevation="2dp"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
+        android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v4.widget.CircleImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/threadCardMemberPicture"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginLeft="15dp"
             android:src="@drawable/ic_menu_camera" />
 
-        <TextView
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
+        <cariteman.hans.tools.CaviarTextView
             android:id="@+id/threadCardMemberName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/threadCardMemberPicture"
-            android:text="Isyana Sarasvati" />
-
-        <TextView
-            android:id="@+id/threadCardDateCreate"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
+            android:text="Isyana Sarasvati" />
+
+        <cariteman.hans.tools.CaviarTextView
+            android:id="@+id/threadCardDateCreate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/threadCardMemberName"
             android:layout_toEndOf="@+id/threadCardMemberPicture"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:text="September 23/2017" />
 
-        <TextView
+        <cariteman.hans.tools.CaviarTextView
             android:id="@+id/threadCardContent"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:text="Lorem Ipsun Dolor Si AMet "
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/threadCardMemberPicture"
-            android:layout_alignParentStart="true" />
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="Lorem Ipsun Dolor Si AMet " />
 
         <View
-            android:layout_marginTop="3dp"
-            android:layout_below="@id/threadCardContent"
-            android:background="@android:color/darker_gray"
             android:layout_width="match_parent"
-            android:layout_height="1dp"/>
+            android:layout_height="1dp"
+            android:layout_below="@id/threadCardContent"
+            android:layout_marginTop="3dp"
+            android:background="@android:color/darker_gray" />
 
         <LinearLayout
-            android:layout_marginTop="8dp"
-            android:layout_below="@+id/threadCardContent"
-            android:paddingLeft="15dp"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/threadCardContent"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp">
+
+            <cariteman.hans.tools.CaviarTextView
+                android:id="@+id/eventDetailTotalLike"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="4dp"
+                android:text="20" />
 
             <ImageView
-                android:src="@drawable/like"
                 android:layout_width="20dp"
-                android:layout_height="20dp" />
+                android:layout_height="20dp"
+                android:src="@drawable/like" />
 
-            <TextView
-                android:layout_marginTop="2dp"
+            <cariteman.hans.tools.CaviarTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="50dp"
-                android:text="Like"
+                android:layout_marginTop="3dp"
+                android:text="Like" />
+
+            <cariteman.hans.tools.CaviarTextView
+                android:id="@+id/eventDetailTotalComment"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="4dp"
+                android:text="10" />
 
             <ImageView
-                android:src="@drawable/comment"
                 android:layout_width="20dp"
-                android:layout_height="20dp" />
+                android:layout_height="20dp"
+                android:src="@drawable/comment" />
 
-            <TextView
-                android:layout_marginTop="2dp"
-                android:layout_marginLeft="10dp"
-                android:text="Comment"
+            <cariteman.hans.tools.CaviarTextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="2dp"
+                android:text="Comment" />
         </LinearLayout>
 
     </RelativeLayout>

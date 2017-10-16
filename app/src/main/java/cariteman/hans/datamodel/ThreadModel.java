@@ -1,6 +1,5 @@
 package cariteman.hans.datamodel;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -18,11 +17,31 @@ public class ThreadModel {
     @SerializedName("memberId")
     private String memberId;
     @SerializedName("comments")
-    private Object comments;
+    private Integer comments;
     @SerializedName("likes")
     private Integer likes;
     @SerializedName("postinganDate")
     private String postinganDate;
+    @SerializedName("hostImg")
+    private String hostImg;
+    @SerializedName("hostedBy")
+    private String hostedBy;
+
+    public String getHostImg() {
+        return hostImg;
+    }
+
+    public void setHostImg(String hostImg) {
+        this.hostImg = hostImg;
+    }
+
+    public String getHostedBy() {
+        return hostedBy;
+    }
+
+    public void setHostedBy(String hostedBy) {
+        this.hostedBy = hostedBy;
+    }
 
     public String getThreadId() {
         return threadId;
@@ -56,11 +75,11 @@ public class ThreadModel {
         this.memberId = memberId;
     }
 
-    public Object getComments() {
+    public Integer getComments() {
         return comments;
     }
 
-    public void setComments(Object comments) {
+    public void setComments(Integer comments) {
         this.comments = comments;
     }
 

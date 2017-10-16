@@ -53,7 +53,7 @@
                     android:layout_height="25dp"
                     android:background="@drawable/multiple_user" />
 
-                <TextView
+                <cariteman.hans.tools.CaviarTextView
                     android:id="@+id/detailEventTotalPeople"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
                     android:layout_height="25dp"
                     android:background="@drawable/four_black_squares" />
 
-                <TextView
+                <cariteman.hans.tools.CaviarTextView
                     android:id="@+id/detailEventCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     />
-                <TextView
+                <cariteman.hans.tools.CaviarTextView
                     android:text="Share"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
@@ -126,7 +126,7 @@
             android:background="@drawable/calendar_and_clock_black"
             android:layout_width="25dp"
             android:layout_height="25dp" />
-        <TextView
+        <cariteman.hans.tools.CaviarTextView
             android:id="@+id/detailEventDate"
             android:padding="5dp"
             android:text="Monday, November 9 at 10.30 PM"
@@ -148,7 +148,7 @@
             android:background="@drawable/placeholder"
             android:layout_width="25dp"
             android:layout_height="25dp" />
-        <TextView
+        <cariteman.hans.tools.CaviarTextView
             android:id="@+id/detailEventLocation"
             android:padding="5dp"
             android:text="Graha Niaga Thamrin"
@@ -164,6 +164,7 @@
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:layout_height="wrap_content">
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/detailEventHostedByImg"
             android:src="@drawable/add_blue"
@@ -171,20 +172,21 @@
             android:layout_marginRight="2dp"
             android:layout_width="25dp"
             android:layout_height="25dp" />
-        <TextView
+
+        <cariteman.hans.tools.CaviarTextView
             android:id="@+id/detailEventHostedByText"
             android:padding="5dp"
-            android:text="Graha Niaga Thamrin"
+            android:text="Hosted By"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <TextView
+    <cariteman.hans.tools.CaviarTextView
         android:id="@+id/textViewDetailEventDescription"
         android:textSize="16sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="Description"
         android:layout_marginTop="10dp"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
@@ -193,7 +195,6 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recViewThreadInDetail"
-        android:padding="20dp"
         android:layout_below="@+id/textViewDetailEventDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
