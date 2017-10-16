@@ -24,6 +24,13 @@
             android:background="#99000000"
             />
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:src="@drawable/ic_menu_camera"
+            android:id="@+id/eventCardHostedImg"
+            android:layout_margin="10dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp" />
+
         <cariteman.hans.tools.OstrichTextView
             android:id="@+id/eventCardHostedBy"
             android:layout_width="wrap_content"
@@ -31,10 +38,9 @@
             android:text="Hosted By Hans"
             android:textColor="#fff"
             android:textSize="20dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="11dp" />
+            android:layout_marginTop="8dp"
+            android:layout_alignTop="@+id/eventCardHostedImg"
+            android:layout_toEndOf="@+id/eventCardHostedImg" />
 
         <cariteman.hans.tools.OstrichTextView
             android:id="@+id/eventCardTitle"
@@ -43,8 +49,8 @@
             android:text="Taylor Swift Tour"
             android:textColor="#fff"
             android:textSize="28dp"
+            android:layout_marginLeft="25dp"
             android:layout_alignBottom="@+id/eventCardLocation"
-            android:layout_alignStart="@+id/eventCardHostedBy"
             android:layout_marginBottom="30dp" />
 
         <cariteman.hans.tools.OstrichTextView

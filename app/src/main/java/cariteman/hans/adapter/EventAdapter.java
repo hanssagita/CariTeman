@@ -18,6 +18,7 @@ import cariteman.hans.tools.OstrichTextView;
 import cariteman.hans.cariteman.DetailEventPageActivity;
 import cariteman.hans.cariteman.R;
 import cariteman.hans.datamodel.EventModel;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by hans.sagita on 12/10/2017.
@@ -45,7 +46,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         final EventModel oneEvent = eventModel.get(position);
         Glide.with(context).load(oneEvent.getBackgroundImg()).into(holder.eventCardImage);
         holder.eventCardTitle.setText(oneEvent.getEventName());
-        holder.eventCardHostedBy.setText("Hosted By " + oneEvent.getHostedBy());
+        holder.eventCardHostedBy.setText(oneEvent.getHostedBy());
         holder.eventCardLocation.setText(oneEvent.getLocation());
         holder.eventCardCategory.setText(oneEvent.getCategory().toUpperCase());
         holder.eventCardDate.setText(oneEvent.getDateResponse().toString());
@@ -58,6 +59,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
                 context.startActivity(intent);
             }
         });
+        Glide.with(context).load(oneEvent.getHostImg()).into(holder.eventHostImg);
     }
 
     @Override
@@ -78,6 +80,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         OstrichTextView eventCardLocation;
         OstrichTextView eventCardCategory;
         RelativeLayout relativeEventCard;
+        CircleImageView eventHostImg;
         public ViewHolder(View itemView) {
             super(itemView);
             eventCardImage = (ImageView)itemView.findViewById(R.id.eventCardImage);
@@ -87,6 +90,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             eventCardLocation = (OstrichTextView)itemView.findViewById(R.id.eventCardLocation);
             eventCardCategory = (OstrichTextView)itemView.findViewById(R.id.eventCardCategory);
             relativeEventCard = (RelativeLayout)itemView.findViewById(R.id.relativeEventCard);
+            eventHostImg = (CircleImageView)itemView.findViewById(R.id.eventCardHostedImg);
         }
     }
 }

@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cariteman.hans.adapter.EventAdapter;
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView recyclerView;
     private EventAdapter eventAdapter;
     private WaveSwipeRefreshLayout pullRefreshAllEvent;
-    private List<EventModel> eventData;
+    private List<EventModel> eventData = new ArrayList<EventModel>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +55,16 @@ public class MainActivity extends AppCompatActivity
         FirebaseMessaging.getInstance().subscribeToTopic("user");
 
         recyclerView = (RecyclerView)findViewById(R.id.recViewAllEvent);
+        pullRefreshAllEvent = (WaveSwipeRefreshLayout)findViewById(R.id.pullRefreshAllEvent);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(llm);
+        fetchDataDummy();
+        eventAdapter = new EventAdapter(eventData,getBaseContext());
+        recyclerView.setAdapter(eventAdapter);
 
-        fetchAllEventData();
+//        fetchAllEventData();
 
         //Validasi check user isLogin Or Not
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -78,11 +83,10 @@ public class MainActivity extends AppCompatActivity
             }
         };
 
-        pullRefreshAllEvent = (WaveSwipeRefreshLayout)findViewById(R.id.pullRefreshAllEvent);
         pullRefreshAllEvent.setOnRefreshListener(new WaveSwipeRefreshLayout.OnRefreshListener(){
             @Override
             public void onRefresh() {
-                fetchAllEventData();
+                fetchDataDummy();
             }
         });
 
@@ -201,8 +205,33 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onFailure(Call<EventResponse> call, Throwable t) {
                 Log.e("Retrovit Error",t.toString());
-                System.out.println(t.toString());
             }
         });
+    }
+
+    private void fetchDataDummy(){
+        EventModel eventModel1 = new EventModel();
+        eventModel1.setEventId("one");
+        eventModel1.setBackgroundImg("http://popspoken.com/wp-content/uploads/2015/01/download.jpeg");
+        eventModel1.setEventName("Taylor Swift World Tour");
+        eventModel1.setHostedBy("Hosted By Taylor Swift");
+        eventModel1.setDateResponse("Today at 19.45 PM");
+        eventModel1.setLocation("Graha Niaga Thamrin");
+        eventModel1.setCategory("Music");
+        eventModel1.setHostImg("https://pbs.twimg.com/profile_images/477132899041296385/M-7XVG3B_400x400.jpeg");
+        eventData.add(eventModel1);
+
+        EventModel eventModel2 = new EventModel();
+        eventModel2.setEventId("two");
+        eventModel2.setBackgroundImg("https://www.airasia.com/cdn/aa-images/en-ID/blibli.jpg?sfvrsn=0");
+        eventModel2.setHostImg("https://pbs.twimg.com/profile_images/477132899041296385/M-7XVG3B_400x400.jpeg");
+        eventModel2.setEventName("Blibli Starlight");
+        eventModel2.setHostedBy("Hosted By  Maroon 5");
+        eventModel2.setDateResponse("Tommorow at 10.45 AM");
+        eventModel2.setLocation("Thamrin Residence");
+        eventModel2.setCategory("Music");
+        eventData.add(eventModel2);
+
+        pullRefreshAllEvent.setRefreshing(false);
     }
 }
