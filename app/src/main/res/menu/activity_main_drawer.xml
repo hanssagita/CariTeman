@@ -3,13 +3,13 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/allEvent"
+            android:icon="@drawable/all_event"
+            android:title="All Event" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/myEvent"
+            android:icon="@drawable/my_event"
+            android:title="My Event" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
@@ -20,6 +20,7 @@
             android:title="Tools" />
         <item
             android:id="@+id/nav_create_event"
+            android:icon="@drawable/create_event"
             android:title="Create Event" />
     </group>
 

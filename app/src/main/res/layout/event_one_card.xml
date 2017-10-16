@@ -64,7 +64,7 @@
             android:layout_marginBottom="8dp"
             android:layout_above="@+id/eventCardCategory"
             android:layout_alignStart="@+id/eventCardTitle" />
-        
+
         <cariteman.hans.tools.CaviarTextView
             android:id="@+id/eventCardDate"
             android:layout_width="wrap_content"

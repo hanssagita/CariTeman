@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView recyclerView;
     private EventAdapter eventAdapter;
     private WaveSwipeRefreshLayout pullRefreshAllEvent;
-    private List<EventModel> eventData = new ArrayList<EventModel>();
+    private List<EventModel> eventData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +60,7 @@ public class MainActivity extends AppCompatActivity
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(llm);
-        fetchDataDummy();
-        eventAdapter = new EventAdapter(eventData,getBaseContext());
-        recyclerView.setAdapter(eventAdapter);
-
+        fetchAllDataDummy();
 //        fetchAllEventData();
 
         //Validasi check user isLogin Or Not
@@ -73,7 +70,7 @@ public class MainActivity extends AppCompatActivity
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    Toast.makeText(MainActivity.this, "Welcome Back User : "+ user.getEmail(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Welcome Back", Toast.LENGTH_SHORT).show();
                 } else {
                     // User is signed out (will be punch out into login activity)
                     startActivity(new Intent(MainActivity.this,
@@ -86,7 +83,7 @@ public class MainActivity extends AppCompatActivity
         pullRefreshAllEvent.setOnRefreshListener(new WaveSwipeRefreshLayout.OnRefreshListener(){
             @Override
             public void onRefresh() {
-                fetchDataDummy();
+                fetchAllDataDummy();
             }
         });
 
@@ -150,10 +147,12 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
+        if (id == R.id.myEvent) {
+            fetchDataMyEventDummy();
+            this.setTitle("My Event");
+        } else if (id == R.id.allEvent) {
+            fetchAllDataDummy();
+            this.setTitle("EventKu");
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
@@ -209,7 +208,8 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-    private void fetchDataDummy(){
+    private void fetchAllDataDummy(){
+        eventData = new ArrayList<>();
         EventModel eventModel1 = new EventModel();
         eventModel1.setEventId("one");
         eventModel1.setBackgroundImg("http://popspoken.com/wp-content/uploads/2015/01/download.jpeg");
@@ -231,7 +231,25 @@ public class MainActivity extends AppCompatActivity
         eventModel2.setLocation("Thamrin Residence");
         eventModel2.setCategory("Music");
         eventData.add(eventModel2);
+        eventAdapter = new EventAdapter(eventData,getBaseContext());
+        recyclerView.setAdapter(eventAdapter);
+        pullRefreshAllEvent.setRefreshing(false);
+    }
 
+    private void fetchDataMyEventDummy(){
+        eventData = new ArrayList<>();
+        EventModel eventModel1 = new EventModel();
+        eventModel1.setEventId("one");
+        eventModel1.setBackgroundImg("http://popspoken.com/wp-content/uploads/2015/01/download.jpeg");
+        eventModel1.setEventName("Taylor Swift World Tour");
+        eventModel1.setHostedBy("Hosted By Taylor Swift");
+        eventModel1.setDateResponse("Today at 19.45 PM");
+        eventModel1.setLocation("Graha Niaga Thamrin");
+        eventModel1.setCategory("Music");
+        eventModel1.setHostImg("https://pbs.twimg.com/profile_images/477132899041296385/M-7XVG3B_400x400.jpeg");
+        eventData.add(eventModel1);
+        eventAdapter = new EventAdapter(eventData,getBaseContext());
+        recyclerView.setAdapter(eventAdapter);
         pullRefreshAllEvent.setRefreshing(false);
     }
 }
