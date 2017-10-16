@@ -19,6 +19,8 @@ import android.widget.Toast;
 import com.crashlytics.android.Crashlytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
@@ -44,6 +46,9 @@ public class MainActivity extends AppCompatActivity
     private EventAdapter eventAdapter;
     private WaveSwipeRefreshLayout pullRefreshAllEvent;
     private List<EventModel> eventData;
+    private FirebaseDatabase mRootRef = FirebaseDatabase.getInstance();
+    private DatabaseReference mUserRef = mRootRef.getReference().child("users");
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +59,8 @@ public class MainActivity extends AppCompatActivity
 
         FirebaseMessaging.getInstance().subscribeToTopic("user");
 
-        recyclerView = (RecyclerView)findViewById(R.id.recViewAllEvent);
-        pullRefreshAllEvent = (WaveSwipeRefreshLayout)findViewById(R.id.pullRefreshAllEvent);
+        recyclerView = (RecyclerView) findViewById(R.id.recViewAllEvent);
+        pullRefreshAllEvent = (WaveSwipeRefreshLayout) findViewById(R.id.pullRefreshAllEvent);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setHasFixedSize(true);
@@ -66,11 +71,19 @@ public class MainActivity extends AppCompatActivity
         //Validasi check user isLogin Or Not
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
+            public void onAuthStateChanged(@NonNull final FirebaseAuth firebaseAuth) {
+                user = firebaseAuth.getCurrentUser();
+
                 if (user != null) {
                     // User is signed in
-                    Toast.makeText(MainActivity.this, "Welcome Back", Toast.LENGTH_SHORT).show();
+                    if (!user.getDisplayName().equals("")) {
+                        Toast.makeText(MainActivity.this, "Welcome, " + user.getDisplayName(),
+                                Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Welcome, " + user.getEmail(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+
                 } else {
                     // User is signed out (will be punch out into login activity)
                     startActivity(new Intent(MainActivity.this,
@@ -80,7 +93,7 @@ public class MainActivity extends AppCompatActivity
             }
         };
 
-        pullRefreshAllEvent.setOnRefreshListener(new WaveSwipeRefreshLayout.OnRefreshListener(){
+        pullRefreshAllEvent.setOnRefreshListener(new WaveSwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 fetchAllDataDummy();
@@ -89,15 +102,6 @@ public class MainActivity extends AppCompatActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -153,11 +157,18 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.allEvent) {
             fetchAllDataDummy();
             this.setTitle("EventKu");
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_edit_profile) {
+            startActivity(new Intent(MainActivity.this,
+                    EditProfileActivity.class));
+            // Handle the camera action
+        } else if (id == R.id.nav_profile) {
+            startActivity(new Intent(MainActivity.this,
+                    ProfileActivity.class));
+//        } else if (id == R.id.nav_slideshow) {
+//
+//        } else if (id == R.id.nav_manage) {
+//
+//        } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_logOut) {
             mAuth.signOut();
@@ -188,7 +199,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void fetchAllEventData(){
+    private void fetchAllEventData() {
         ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
         Call<EventResponse> call = apiService.getAllEvent();
@@ -196,19 +207,19 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
                 eventData = response.body().getResults();
-                eventAdapter = new EventAdapter(eventData,getBaseContext());
+                eventAdapter = new EventAdapter(eventData, getBaseContext());
                 recyclerView.setAdapter(eventAdapter);
                 pullRefreshAllEvent.setRefreshing(false);
             }
 
             @Override
             public void onFailure(Call<EventResponse> call, Throwable t) {
-                Log.e("Retrovit Error",t.toString());
+                Log.e("Retrovit Error", t.toString());
             }
         });
     }
 
-    private void fetchAllDataDummy(){
+    private void fetchAllDataDummy() {
         eventData = new ArrayList<>();
         EventModel eventModel1 = new EventModel();
         eventModel1.setEventId("one");
@@ -216,7 +227,7 @@ public class MainActivity extends AppCompatActivity
         eventModel1.setEventName("Taylor Swift World Tour");
         eventModel1.setHostedBy("Hosted By Taylor Swift");
         eventModel1.setDateResponse("Today at 19.45 PM");
-        eventModel1.setLocation("Graha Niaga Thamrin");
+        eventModel1.setLocation("Grha Niaga Thamrin");
         eventModel1.setCategory("Music");
         eventModel1.setHostImg("https://pbs.twimg.com/profile_images/477132899041296385/M-7XVG3B_400x400.jpeg");
         eventData.add(eventModel1);
@@ -226,17 +237,17 @@ public class MainActivity extends AppCompatActivity
         eventModel2.setBackgroundImg("https://www.airasia.com/cdn/aa-images/en-ID/blibli.jpg?sfvrsn=0");
         eventModel2.setHostImg("https://pbs.twimg.com/profile_images/477132899041296385/M-7XVG3B_400x400.jpeg");
         eventModel2.setEventName("Blibli Starlight");
-        eventModel2.setHostedBy("Hosted By  Maroon 5");
-        eventModel2.setDateResponse("Tommorow at 10.45 AM");
+        eventModel2.setHostedBy("Hosted By Maroon 5");
+        eventModel2.setDateResponse("Tomorrow at 10.45 AM");
         eventModel2.setLocation("Thamrin Residence");
         eventModel2.setCategory("Music");
         eventData.add(eventModel2);
-        eventAdapter = new EventAdapter(eventData,getBaseContext());
+        eventAdapter = new EventAdapter(eventData, getBaseContext());
         recyclerView.setAdapter(eventAdapter);
         pullRefreshAllEvent.setRefreshing(false);
     }
 
-    private void fetchDataMyEventDummy(){
+    private void fetchDataMyEventDummy() {
         eventData = new ArrayList<>();
         EventModel eventModel1 = new EventModel();
         eventModel1.setEventId("one");
@@ -244,11 +255,11 @@ public class MainActivity extends AppCompatActivity
         eventModel1.setEventName("Taylor Swift World Tour");
         eventModel1.setHostedBy("Hosted By Taylor Swift");
         eventModel1.setDateResponse("Today at 19.45 PM");
-        eventModel1.setLocation("Graha Niaga Thamrin");
+        eventModel1.setLocation("Grha Niaga Thamrin");
         eventModel1.setCategory("Music");
         eventModel1.setHostImg("https://pbs.twimg.com/profile_images/477132899041296385/M-7XVG3B_400x400.jpeg");
         eventData.add(eventModel1);
-        eventAdapter = new EventAdapter(eventData,getBaseContext());
+        eventAdapter = new EventAdapter(eventData, getBaseContext());
         recyclerView.setAdapter(eventAdapter);
         pullRefreshAllEvent.setRefreshing(false);
     }

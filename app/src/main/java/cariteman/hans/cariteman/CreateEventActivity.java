@@ -35,7 +35,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cariteman.hans.datamodel.EventModel;
 import fr.ganfra.materialspinner.MaterialSpinner;
@@ -82,6 +84,9 @@ public class CreateEventActivity extends AppCompatActivity implements
     private ImageView mImageView;
     //a Uri object to store file path
     private Uri filePath;
+
+    private FirebaseStorage mStorage = FirebaseStorage.getInstance();
+    private StorageReference mStorageRef = mStorage.getReferenceFromUrl("gs://cariteman-256b3.appspot.com");
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -158,14 +163,14 @@ public class CreateEventActivity extends AppCompatActivity implements
                 long tt = t.getTime() - (t.getTime() / 86400000l * 86400000l);
                 eventDate = new Date(dd+tt);
 
-                EventModel eventModel = new EventModel();
-                eventModel.setEventName(eventName);
-                eventModel.setCategory(eventCategory);
+                // TODO: call api createEvent / save to Cloud Firestore
+//                EventModel eventModel = new EventModel();
+//                eventModel.setEventName(eventName);
+//                eventModel.setCategory(eventCategory);
 //                eventModel.setEventDescription(eventDescription);
 //                eventModel.setEventDate(eventDate);
 //                eventModel.setBackgroundImg();
 
-                // TODO: call api createEvent
             }
         });
     }
@@ -218,7 +223,7 @@ public class CreateEventActivity extends AppCompatActivity implements
         }
         //if there is not any file
         else {
-            //isplay an error toast
+            Toast.makeText(getApplicationContext(), "No chosen file!", Toast.LENGTH_SHORT).show();
         }
     }
 

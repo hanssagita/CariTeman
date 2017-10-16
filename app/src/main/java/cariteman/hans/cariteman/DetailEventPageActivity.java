@@ -108,7 +108,7 @@ public class DetailEventPageActivity extends AppCompatActivity {
             detailEventData.setEventName("Taylor Swift World Tour");
             detailEventData.setHostedBy("Hosted By Taylor Swift");
             detailEventData.setDateResponse("Today at 19.45 PM");
-            detailEventData.setLocation("Graha Niaga Thamrin");
+            detailEventData.setLocation("Grha Niaga Thamrin");
             detailEventData.setCategory("Music");
             detailEventData.setHostImg("https://pbs.twimg.com/profile_images/477132899041296385/M-7XVG3B_400x400.jpeg");
             detailEventData.setDescription("Taylor Swift World Tour, Taylor Swift Cantik Seksi Kaya cici CF");
@@ -119,8 +119,8 @@ public class DetailEventPageActivity extends AppCompatActivity {
             detailEventData.setBackgroundImg("https://www.airasia.com/cdn/aa-images/en-ID/blibli.jpg?sfvrsn=0");
             detailEventData.setHostImg("https://pbs.twimg.com/profile_images/477132899041296385/M-7XVG3B_400x400.jpeg");
             detailEventData.setEventName("Blibli Starlight");
-            detailEventData.setHostedBy("Hosted By  Maroon 5");
-            detailEventData.setDateResponse("Tommorow at 10.45 AM");
+            detailEventData.setHostedBy("Hosted By Maroon 5");
+            detailEventData.setDateResponse("Tomorrow at 10.45 AM");
             detailEventData.setLocation("Thamrin Residence");
             detailEventData.setCategory("Music");
             detailEventData.setDescription("lorem ipsun dolor si amet dolor dolor dolor baymax kucing");

@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import cariteman.hans.datamodel.Member;
+import cariteman.hans.datamodel.User;
 
 public class RegisterPageActivity extends AppCompatActivity {
 
@@ -30,7 +30,7 @@ public class RegisterPageActivity extends AppCompatActivity {
     private EditText editTextPhoneNumberRegister;
     private FirebaseAuth mAuth;
     private FirebaseDatabase mRootRef = FirebaseDatabase.getInstance();
-    private DatabaseReference mMemberRef = mRootRef.getReference().child("users");
+    private DatabaseReference mUserRef = mRootRef.getReference().child("users");
     private String email;
     private String password;
     private String fullName;
@@ -63,7 +63,6 @@ public class RegisterPageActivity extends AppCompatActivity {
 
                 email = editTextEmailRegister.getText().toString().trim();
                 password = editTextPasswordRegister.getText().toString().trim();
-                password = editTextPasswordRegister.getText().toString().trim();
                 fullName = editTextFullNameRegister.getText().toString().trim();
                 address = editTextAddressRegister.getText().toString().trim();
                 phoneNumber = editTextPhoneNumberRegister.getText().toString().trim();
@@ -75,9 +74,10 @@ public class RegisterPageActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
 
                                     //Todo Disini bakal di buat post request data user ke backend buat di save data di backend
-                                    Member member = new Member(email,address,fullName,phoneNumber);
-                                    mMemberRef.child(mMemberRef.push().getKey())
-                                            .setValue(member).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    User user = new User(email, address, fullName, phoneNumber,
+                                            "https://pbs.twimg.com/profile_images/477132899041296385/M-7XVG3B_400x400.jpeg");
+                                    mUserRef.child(mUserRef.push().getKey())
+                                            .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if(task.isComplete()){

@@ -8,28 +8,26 @@
     android:background="@drawable/animation_list"
     tools:context="cariteman.hans.cariteman.LoginPageActivity">
 
-    <Button
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="Force Crash!"
-        android:onClick="forceCrash"
-        android:layout_centerHorizontal="true" />
+    <!--<Button-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:text="Force Crash!"-->
+        <!--android:onClick="forceCrash"-->
+        <!--android:layout_centerHorizontal="true" />-->
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/editTextEmailLogin"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="70dp"
-        android:textSize="24sp"
-        android:text="Login" />
+    <ImageView
+        android:id="@+id/loginPageLogo"
+        android:src="@drawable/logo64"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:id="@+id/editTextEmailLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
@@ -46,15 +44,42 @@
         android:hint="Password"
         android:inputType="textPassword" />
 
-
-    <Button
-        android:id="@+id/buttonLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="43dp"
-        android:text="Login"
+    <RelativeLayout
+        android:id="@+id/relLoginRegister"
         android:layout_below="@+id/editTextEmailLogin"
-        android:layout_centerHorizontal="true" />
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/buttonLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:layout_toLeftOf="@+id/view"
+            android:padding="8dp"
+            android:text="Login"
+            android:layout_centerHorizontal="true"
+            android:textSize="16sp" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_height="1dp"
+            android:layout_width="0dp"
+            android:layout_centerHorizontal="true"
+            />
+
+        <Button
+            android:id="@+id/buttonRegisterInLoginPage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/view"
+            android:layout_marginTop="44dp"
+            android:padding="8dp"
+            android:text="Register"
+            android:layout_centerHorizontal="true"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/buttonSignInWithGoogleAccount"
@@ -64,14 +89,6 @@
         tools:visibility="gone"
         android:layout_marginTop="43dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/buttonLogin" />
-
-    <Button
-        android:id="@+id/buttonRegisterInLoginPage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Register Page"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@id/relLoginRegister" />
 
 </RelativeLayout>

@@ -1,12 +1,7 @@
 package cariteman.hans.cariteman;
 
 // Firebase Performance
-import com.google.firebase.perf.FirebasePerformance;
-import com.google.firebase.perf.metrics.Trace;
 
-import android.app.ProgressDialog;
-import android.content.ClipData;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -18,7 +13,6 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -35,12 +29,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.crash.FirebaseCrash;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.perf.metrics.AddTrace;
 
-import cariteman.hans.datamodel.Member;
-import io.fabric.sdk.android.Fabric;
+import cariteman.hans.datamodel.User;
 
 public class LoginPageActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
@@ -53,7 +45,7 @@ public class LoginPageActivity extends AppCompatActivity implements GoogleApiCli
     private SignInButton buttonSignInWithGoogleAccount;
     private static final int RC_SIGN_IN = 9001;
     private FirebaseDatabase mRootRef = FirebaseDatabase.getInstance();
-    private DatabaseReference mMemberRef = mRootRef.getReference().child("members");
+    private DatabaseReference mUserRef = mRootRef.getReference().child("users");
     private AnimationDrawable animationDrawable;
     private RelativeLayout relativeLayout;
 
@@ -175,17 +167,8 @@ public class LoginPageActivity extends AppCompatActivity implements GoogleApiCli
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            //TODO maybe will be call to backend to get fullname and username and save to session
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Member member = new Member(user.getEmail(),"Unknown",user.getDisplayName(),user.getPhoneNumber());
-                            mMemberRef.child(mMemberRef.push().getKey()).setValue(member).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isComplete()){
-                                        startActivity(new Intent(LoginPageActivity.this,MainActivity.class));
-                                    }
-                                }
-                            });
+                            // save data to firebase, already handled by Cloud Functions (createNewUser)
+                            startActivity(new Intent(LoginPageActivity.this,MainActivity.class));
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(LoginPageActivity.this, "Authentication failed.",
