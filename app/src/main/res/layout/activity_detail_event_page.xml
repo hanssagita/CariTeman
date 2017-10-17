@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context="cariteman.hans.cariteman.DetailEventPageActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <ImageView
         android:scaleType="fitXY"
@@ -87,6 +95,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linearLayoutDetailShareEvent"
                 android:paddingLeft="25dp"
                 android:paddingRight="25dp"
                 android:gravity="center"
@@ -200,5 +209,8 @@
         android:layout_height="wrap_content">
 
     </android.support.v7.widget.RecyclerView>
+
+    </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>

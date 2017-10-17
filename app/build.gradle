@@ -44,6 +44,21 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
+    // Firebase Storage
+    
+
+    // Firebase Performance
+    
+    // Firebase Crash
+    
+    // Crash Analytics
+    compile('com.crashlytics.sdk.android:crashlytics:2.7.0@aar') {
+        transitive = true;
+    }
+
+    
+    // Material Spinner
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -61,27 +76,13 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile 'de.hdodenhof:circleimageview:2.2.0'
-
-    // Firebase Storage
     compile 'com.google.firebase:firebase-storage:11.4.2'
-
-    // Firebase Performance
     compile 'com.google.firebase:firebase-perf:11.4.2'
-
-    // Firebase Crash
     compile 'com.google.firebase:firebase-crash:11.4.2'
-
-    // Crash Analytics
-    compile('com.crashlytics.sdk.android:crashlytics:2.7.0@aar') {
-        transitive = true;
-    }
-
-    compile 'de.hdodenhof:circleimageview:2.1.0'
-
-    // Material Spinner
-    compile('com.github.ganfra:material-spinner:1.1.1')
+    compile 'com.github.ganfra:material-spinner:1.1.1'
     testCompile 'junit:junit:4.12'
 }
+
 
 
 apply plugin: 'com.google.gms.google-services'

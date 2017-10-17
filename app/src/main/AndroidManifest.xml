@@ -29,10 +29,10 @@
         <activity
             android:name=".DetailEventPageActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SplashScreenActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".SplashScreenActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
         <activity
             android:name=".ProfileActivity"
             android:exported="false"
@@ -41,20 +41,32 @@
         <activity
             android:name=".EditProfileActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".CreateEventActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
+
         <service android:name=".MyFirebaseMessagingService">
-            <intent-filter> 
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/> 
-            </intent-filter> 
+            <intent-filter>
+                 
+
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                 
+
+            </intent-filter>
+             
+
         </service>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="0d2766dad442efd643566ef0e85ab78673014fe8" />
-        <meta-data android:name="firebase_performance_logcat_enabled" android:value="true" />
+        <meta-data
+            android:name="firebase_performance_logcat_enabled"
+            android:value="true" />
+
+        <activity android:name=".DetailEventThreadPageActivity"></activity>
     </application>
 
 </manifest>

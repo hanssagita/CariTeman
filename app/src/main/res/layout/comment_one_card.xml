@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="30dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/commentHostedByImg"
+        android:src="@mipmap/ic_launcher"
+        android:layout_width="35dp"
+        android:layout_height="35dp" />
+    <cariteman.hans.tools.CaviarTextView
+        android:text="Hans"
+        android:id="@+id/commentHostedByName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/commentHostedByImg" />
+    <cariteman.hans.tools.CaviarTextView
+        android:text="Lorem Ipsun Dolor si amet"
+        android:id="@+id/commentContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/commentHostedByName"
+        android:layout_toEndOf="@+id/commentHostedByImg" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:layout_below="@+id/commentHostedByImg"
+        android:layout_alignParentStart="true">
+
+        <cariteman.hans.tools.CaviarTextView
+            android:id="@+id/commentTotalLike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="4dp"
+            android:text="20" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/like" />
+
+        <cariteman.hans.tools.CaviarTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="3dp"
+            android:text="Like" />
+
+        <cariteman.hans.tools.CaviarTextView
+            android:id="@+id/commentDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="October 11 at 11.21 PM" />
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

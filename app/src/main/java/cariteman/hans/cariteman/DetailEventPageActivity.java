@@ -1,11 +1,14 @@
 package cariteman.hans.cariteman;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 
@@ -40,6 +43,7 @@ public class DetailEventPageActivity extends AppCompatActivity {
     private List<ThreadModel> threadEventData;
     private RecyclerView recViewThreadInDetail;
     private ThreadAdapter threadAdapter;
+    private LinearLayout linearLayoutDetailShareEvent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,7 @@ public class DetailEventPageActivity extends AppCompatActivity {
         detailEventHostedByImg = (CircleImageView) findViewById(R.id.detailEventHostedByImg);
         detailEventLocation = (CaviarTextView)findViewById(R.id.detailEventLocation);
         recViewThreadInDetail = (RecyclerView)findViewById(R.id.recViewThreadInDetail);
+        linearLayoutDetailShareEvent = (LinearLayout)findViewById(R.id.linearLayoutDetailShareEvent);
 
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
@@ -78,6 +83,13 @@ public class DetailEventPageActivity extends AppCompatActivity {
         fetchDataThreadDummy();
         threadAdapter = new ThreadAdapter(threadEventData, DetailEventPageActivity.this);
         recViewThreadInDetail.setAdapter(threadAdapter);
+
+        linearLayoutDetailShareEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popUpShareDetail();
+            }
+        });
 
     }
 
@@ -111,7 +123,8 @@ public class DetailEventPageActivity extends AppCompatActivity {
             detailEventData.setLocation("Grha Niaga Thamrin");
             detailEventData.setCategory("Music");
             detailEventData.setHostImg("https://pbs.twimg.com/profile_images/477132899041296385/M-7XVG3B_400x400.jpeg");
-            detailEventData.setDescription("Taylor Swift World Tour, Taylor Swift Cantik Seksi Kaya cici CF");
+            detailEventData.setDescription("Taylor Swift World Tour, lorem ipsun dolor si amet. " +
+                    "lorem ipsun dolor si mamet mamet makan lorem ipsun");
             detailEventData.setTotalPeople(100);
         }
         if(eventId.equals("two")){
@@ -165,5 +178,14 @@ public class DetailEventPageActivity extends AppCompatActivity {
         detailEventLocation.setText(detailEventData.getLocation());
         detailEventHostedByText.setText(detailEventData.getHostedBy());
         Glide.with(DetailEventPageActivity.this).load(detailEventData.getHostImg()).into(detailEventHostedByImg);
+    }
+
+    private void popUpShareDetail(){
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "Please Check " + detailEventData.getEventName()
+                + " Event in Eventku Application");
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
     }
 }
