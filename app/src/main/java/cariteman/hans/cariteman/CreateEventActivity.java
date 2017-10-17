@@ -12,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,8 +24,13 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -40,6 +46,7 @@ import java.util.List;
 import java.util.Map;
 
 import cariteman.hans.datamodel.EventModel;
+import cariteman.hans.datamodel.User;
 import fr.ganfra.materialspinner.MaterialSpinner;
 import io.fabric.sdk.android.Fabric;
 
@@ -60,6 +67,7 @@ public class CreateEventActivity extends AppCompatActivity implements
 
     private TextInputEditText mNameView;
     private TextInputEditText mDescriptionView;
+    private TextInputEditText mLocationView;
     private TextView mDateView;
     private TextView mTimeView;
     private View mSelectDate;
@@ -68,16 +76,20 @@ public class CreateEventActivity extends AppCompatActivity implements
     private Button btnChoose;
     private Button btnUpload;
 
+    private FirebaseDatabase mRootRef = FirebaseDatabase.getInstance();
+    private DatabaseReference mEventRef = mRootRef.getReference().child("events");
+
     private String eventName;
     private String eventDescription;
     private String eventCategory;
+    private String eventLocation;
+    private String backgroundImageURL;
     private Date eventDate;
 
     //Selected due date, stored as a timestamp
     private long mDate = Long.MAX_VALUE;
     //Selected time, stored as a timestamp
     private long mTime = Long.MAX_VALUE;
-    private String zone;
 
     private SimpleDateFormat dateFormat, timeFormat;
 
@@ -94,6 +106,9 @@ public class CreateEventActivity extends AppCompatActivity implements
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_create_event);
 
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("user");
+        FirebaseMessaging.getInstance().subscribeToTopic("event");
+
         mImageView = (ImageView) findViewById(R.id.imageView);
 
         dateFormat = new SimpleDateFormat("EEEE, MMM d");
@@ -101,6 +116,7 @@ public class CreateEventActivity extends AppCompatActivity implements
 
         mNameView = (TextInputEditText) findViewById(R.id.text_input_event_name);
         mDescriptionView = (TextInputEditText) findViewById(R.id.text_input_event_descirption);
+        mLocationView = (TextInputEditText) findViewById(R.id.text_input_event_location);
         mDateView = (TextView) findViewById(R.id.text_date);
         mTimeView = (TextView) findViewById(R.id.text_time);
         mSelectDate = findViewById(R.id.select_date);
@@ -157,20 +173,36 @@ public class CreateEventActivity extends AppCompatActivity implements
                 if (eventCategory.isEmpty()) {
                     spinner.setError("Please choose category");
                 }
+                eventLocation = mLocationView.getText().toString().trim();
                 Date d = new Date(mDate);
                 Date t = new Date(mTime);
                 long dd = d.getTime() / 86400000l * 86400000l;
                 long tt = t.getTime() - (t.getTime() / 86400000l * 86400000l);
+                long timestampEventDate = dd+tt;
                 eventDate = new Date(dd+tt);
 
-                // TODO: call api createEvent / save to Cloud Firestore
-//                EventModel eventModel = new EventModel();
-//                eventModel.setEventName(eventName);
-//                eventModel.setCategory(eventCategory);
-//                eventModel.setEventDescription(eventDescription);
-//                eventModel.setEventDate(eventDate);
-//                eventModel.setBackgroundImg();
+                Map<String, Object> eventData = new HashMap<>();
+                eventData.put("eventName", eventName);
+                eventData.put("eventCategory", eventCategory);
+                eventData.put("eventDate", timestampEventDate);
+                eventData.put("eventDescription", eventDescription);
+                eventData.put("eventLocation", eventLocation);
+                eventData.put("backgroundImageURL", backgroundImageURL);
 
+                // TODO: call api createEvent / save to Cloud Firestore
+
+                // Save to Firebase Realtime Database
+                mEventRef.child(mEventRef.push().getKey())
+                        .setValue(eventData).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isComplete()){
+                            startActivity(new Intent(CreateEventActivity.this,
+                                    MainActivity.class));
+                            finish();
+                        }
+                    }
+                });
             }
         });
     }
@@ -186,7 +218,7 @@ public class CreateEventActivity extends AppCompatActivity implements
 
             FirebaseStorage storage = FirebaseStorage.getInstance();
             StorageReference storageReference = storage.getReference();
-            StorageReference eventsRef = storageReference.child("images/pic.jpg");
+            StorageReference eventsRef = storageReference.child("background_image.jpg");
             eventsRef.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -194,6 +226,8 @@ public class CreateEventActivity extends AppCompatActivity implements
                             //if the upload is successfull
                             //hiding the progress dialog
                             progressDialog.dismiss();
+
+                            backgroundImageURL = taskSnapshot.getDownloadUrl().toString();
 
                             //and displaying a success toast
                             Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
@@ -251,7 +285,7 @@ public class CreateEventActivity extends AppCompatActivity implements
     }
 
     private void setCategoryList() {
-        categoryList.add(0, "Entertainment");
+        categoryList.add(0, "Music");
         categoryList.add(1, "Study");
         categoryList.add(2, "Sport");
     }
@@ -259,14 +293,14 @@ public class CreateEventActivity extends AppCompatActivity implements
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putLong("eventDate", mDate);
+//        outState.putLong("eventDate", mDate);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        mDate = savedInstanceState.getLong("eventDate", Long.MAX_VALUE);
-        updateDateDisplay();
+//        mDate = savedInstanceState.getLong("eventDate", Long.MAX_VALUE);
+//        updateDateDisplay();
     }
 
     /* Manage the selected date value */

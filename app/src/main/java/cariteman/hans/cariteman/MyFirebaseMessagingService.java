@@ -11,9 +11,13 @@ import android.support.v4.app.NotificationCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import java.text.SimpleDateFormat;
+
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "FirebaseMessagingServce";
+
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MMM d hh:mm a");
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -32,8 +36,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
-            pushNotification("Welcome new user!",
-                    remoteMessage.getData().get("email") + " | " + remoteMessage.getData().get("name"));
+//            pushNotification("Welcome new user!",
+//                    remoteMessage.getData().get("email") + " | " + remoteMessage.getData().get("name"));
+            pushNotification(remoteMessage.getData().get("name"),
+                    remoteMessage.getData().get("category") + " at " +
+                            remoteMessage.getData().get("location"));
+//                            remoteMessage.getData().get("date"));
         }
     }
 

@@ -61,7 +61,8 @@ public class LoginPageActivity extends AppCompatActivity implements GoogleApiCli
         // myTrace.start();
 
         // Subscribe Topic Push Notification
-        FirebaseMessaging.getInstance().subscribeToTopic("user");
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("user");
+        FirebaseMessaging.getInstance().subscribeToTopic("event");
 
         relativeLayout = (RelativeLayout)findViewById(R.id.relativeLayoutLoginPage);
         animationDrawable =(AnimationDrawable)relativeLayout.getBackground();

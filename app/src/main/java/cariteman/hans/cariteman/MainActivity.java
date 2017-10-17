@@ -57,7 +57,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
 
-        FirebaseMessaging.getInstance().subscribeToTopic("user");
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("user");
+        FirebaseMessaging.getInstance().subscribeToTopic("event");
 
         recyclerView = (RecyclerView) findViewById(R.id.recViewAllEvent);
         pullRefreshAllEvent = (WaveSwipeRefreshLayout) findViewById(R.id.pullRefreshAllEvent);
