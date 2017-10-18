@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -26,6 +25,19 @@
         android:layout_height="220dp"
         android:background="#73000000"
         />
+
+        <cariteman.hans.tools.CaviarTextView
+            android:textSize="24dp"
+            android:text="RSVP"
+            android:padding="2dp"
+            android:background="@drawable/border_box_white"
+            android:textColor="@android:color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="11dp"
+            android:layout_marginTop="16dp" />
 
         <cariteman.hans.tools.CaviarTextView
             android:id="@+id/textViewDetailEventTitle"

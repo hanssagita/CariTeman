@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
@@ -41,7 +41,7 @@ public class ThreadAdapter extends RecyclerView.Adapter<ThreadAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         final ThreadModel oneThread = threadModel.get(position);
         Glide.with(context).load(oneThread.getHostImg()).into(holder.threadCardMemberPicture);
         holder.threadCardMemberName.setText(oneThread.getHostedBy());
@@ -49,7 +49,22 @@ public class ThreadAdapter extends RecyclerView.Adapter<ThreadAdapter.ViewHolder
         holder.threadCardContent.setText(oneThread.getMessage());
         holder.eventDetailTotalLike.setText(oneThread.getLikes().toString());
         holder.eventDetailTotalComment.setText(oneThread.getComments().toString());
-        holder.relativeLayoutThread.setOnClickListener(new View.OnClickListener() {
+
+        holder.likeIconInThreadOneCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int totalLike = oneThread.getLikes() + 1;
+                holder.eventDetailTotalLike.setText(totalLike + "");
+            }
+        });
+        holder.likeTextInThreadOneCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int totalLike = oneThread.getLikes() + 1;
+                holder.eventDetailTotalLike.setText(totalLike + "");
+            }
+        });
+        holder.eventDetailTextComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DetailEventThreadPageActivity.class);
@@ -58,6 +73,16 @@ public class ThreadAdapter extends RecyclerView.Adapter<ThreadAdapter.ViewHolder
                 context.startActivity(intent);
             }
         });
+        holder.eventDetailIconComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DetailEventThreadPageActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("threadId",oneThread.getThreadId());
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -72,7 +97,11 @@ public class ThreadAdapter extends RecyclerView.Adapter<ThreadAdapter.ViewHolder
         private CaviarTextView threadCardContent;
         private CaviarTextView eventDetailTotalLike;
         private CaviarTextView eventDetailTotalComment;
-        private RelativeLayout relativeLayoutThread;
+        private CaviarTextView likeTextInThreadOneCard;
+        private CaviarTextView eventDetailTextComment;
+        private ImageView likeIconInThreadOneCard;
+        private ImageView eventDetailIconComment;
+
         public ViewHolder(View itemView) {
             super(itemView);
             threadCardMemberPicture = (CircleImageView)itemView.findViewById(R.id.threadCardMemberPicture);
@@ -81,7 +110,10 @@ public class ThreadAdapter extends RecyclerView.Adapter<ThreadAdapter.ViewHolder
             threadCardContent = (CaviarTextView)itemView.findViewById(R.id.threadCardContent);
             eventDetailTotalLike = (CaviarTextView)itemView.findViewById(R.id.eventDetailTotalLike);
             eventDetailTotalComment = (CaviarTextView)itemView.findViewById(R.id.eventDetailTotalComment);
-            relativeLayoutThread = (RelativeLayout)itemView.findViewById(R.id.relativeLayoutThread);
+            likeTextInThreadOneCard = (CaviarTextView)itemView.findViewById(R.id.likeTextInThreadOneCard);
+            eventDetailTextComment = (CaviarTextView)itemView.findViewById(R.id.eventDetailTextComment);
+            likeIconInThreadOneCard = (ImageView)itemView.findViewById(R.id.likeIconInThreadOneCard);
+            eventDetailIconComment = (ImageView)itemView.findViewById(R.id.eventDetailIconComment);
         }
     }
 }
