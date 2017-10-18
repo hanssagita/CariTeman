@@ -6,12 +6,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +48,8 @@ public class DetailEventPageActivity extends AppCompatActivity {
     private RecyclerView recViewThreadInDetail;
     private ThreadAdapter threadAdapter;
     private LinearLayout linearLayoutDetailShareEvent;
+    private EditText editTextNewThread;
+    private String newThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +66,7 @@ public class DetailEventPageActivity extends AppCompatActivity {
         detailEventLocation = (CaviarTextView)findViewById(R.id.detailEventLocation);
         recViewThreadInDetail = (RecyclerView)findViewById(R.id.recViewThreadInDetail);
         linearLayoutDetailShareEvent = (LinearLayout)findViewById(R.id.linearLayoutDetailShareEvent);
+        editTextNewThread = (EditText)findViewById(R.id.editTextNewThread);
 
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
@@ -88,6 +95,40 @@ public class DetailEventPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 popUpShareDetail();
+            }
+        });
+
+        editTextNewThread.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN)
+                {
+                    switch (keyCode)
+                    {
+                        case KeyEvent.KEYCODE_DPAD_CENTER:
+                        case KeyEvent.KEYCODE_ENTER:
+                            newThread = editTextNewThread.getText().toString().trim();
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MMM d hh:mm a");
+                            ThreadModel threadData5 = new ThreadModel();
+                            threadData5.setHostedBy("Jevon Ave");
+                            threadData5.setComments(0);
+                            threadData5.setEventId("one");
+                            threadData5.setHostImg("http://jevonave.azurewebsites.net/img/jevonaverillbinus.jpg");
+                            threadData5.setLikes(0);
+                            threadData5.setMessage(newThread);
+                            threadData5.setPostinganDate("One Hour Ago");
+                            threadData5.setThreadId("threadFive");
+                            threadEventData.add(threadData5);
+                            threadAdapter= new ThreadAdapter(threadEventData, getBaseContext());
+                            recViewThreadInDetail.setAdapter(threadAdapter);
+                            editTextNewThread.setText("");
+                            Toast.makeText(DetailEventPageActivity.this, "Success Post Thread", Toast.LENGTH_SHORT).show();
+                            return true;
+                        default:
+                            break;
+                    }
+                }
+                return false;
             }
         });
 

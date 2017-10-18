@@ -223,6 +223,23 @@
 
     </android.support.v7.widget.RecyclerView>
 
+        <EditText
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingRight="10dp"
+            android:hint="Write a new thread..."
+            android:id="@+id/editTextNewThread"
+            android:background="@drawable/rounded_corner_post_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/recViewThreadInDetail"
+            android:layout_alignParentStart="true" />
+
     </RelativeLayout>
     </ScrollView>
 

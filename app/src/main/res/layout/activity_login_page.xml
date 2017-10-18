@@ -45,6 +45,7 @@
         android:inputType="textPassword" />
 
     <RelativeLayout
+        android:layout_marginTop="20dp"
         android:id="@+id/relLoginRegister"
         android:layout_below="@+id/editTextEmailLogin"
         android:layout_width="fill_parent"
@@ -52,8 +53,9 @@
 
         <Button
             android:id="@+id/buttonLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner_button"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
             android:layout_marginTop="44dp"
             android:layout_toLeftOf="@+id/view"
             android:padding="8dp"
@@ -63,6 +65,8 @@
 
         <View
             android:id="@+id/view"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_height="1dp"
             android:layout_width="0dp"
             android:layout_centerHorizontal="true"
@@ -70,8 +74,9 @@
 
         <Button
             android:id="@+id/buttonRegisterInLoginPage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner_button"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
             android:layout_toRightOf="@+id/view"
             android:layout_marginTop="44dp"
             android:padding="8dp"
