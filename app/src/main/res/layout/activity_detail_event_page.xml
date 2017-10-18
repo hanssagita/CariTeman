@@ -27,6 +27,7 @@
         />
 
         <cariteman.hans.tools.CaviarTextView
+            android:id="@+id/rsvpTextView"
             android:textSize="24dp"
             android:text="RSVP"
             android:padding="2dp"

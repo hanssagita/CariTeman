@@ -116,51 +116,64 @@ public class DetailEventPageActivity extends AppCompatActivity {
         detailEventData = new DetailEventModel();
         if(eventId.equals("one")){
             detailEventData.setEventId("1");
-            detailEventData.setBackgroundImg("http://popspoken.com/wp-content/uploads/2015/01/download.jpeg");
-            detailEventData.setEventName("Taylor Swift World Tour");
-            detailEventData.setHostedBy("Hosted By Taylor Swift");
-            detailEventData.setDateResponse("Today at 19.45 PM");
-            detailEventData.setLocation("Grha Niaga Thamrin");
+            detailEventData.setBackgroundImg("https://i.ytimg.com/vi/1PzVgMFqy0A/maxresdefault.jpg");
+            detailEventData.setEventName("Payung Teduh Goes to Binus");
+            detailEventData.setHostedBy("Hosted By Payung Teduh");
+            detailEventData.setDateResponse("Tomorrow at 14.35 AM");
+            detailEventData.setLocation("Bina Nusantara, Kampus Alam Sutera");
             detailEventData.setCategory("Music");
-            detailEventData.setHostImg("https://pbs.twimg.com/profile_images/477132899041296385/M-7XVG3B_400x400.jpeg");
-            detailEventData.setDescription("Taylor Swift World Tour, lorem ipsun dolor si amet. " +
-                    "lorem ipsun dolor si mamet mamet makan lorem ipsun");
+            detailEventData.setHostImg("http://www.pramborsfm.com/wp-content/uploads/2017/09/payung-teduh-akad1.jpg");
+            detailEventData.setDescription("Perjalanan karir band payung teduh, yang di selenggarakan di universitas Bina Nusantara");
             detailEventData.setTotalPeople(100);
         }
         if(eventId.equals("two")){
             detailEventData.setEventId("2");
-            detailEventData.setBackgroundImg("https://www.airasia.com/cdn/aa-images/en-ID/blibli.jpg?sfvrsn=0");
-            detailEventData.setHostImg("https://pbs.twimg.com/profile_images/477132899041296385/M-7XVG3B_400x400.jpeg");
-            detailEventData.setEventName("Blibli Starlight");
-            detailEventData.setHostedBy("Hosted By Maroon 5");
-            detailEventData.setDateResponse("Tomorrow at 10.45 AM");
-            detailEventData.setLocation("Thamrin Residence");
-            detailEventData.setCategory("Music");
-            detailEventData.setDescription("lorem ipsun dolor si amet dolor dolor dolor baymax kucing");
+            detailEventData.setBackgroundImg("http://event.binus.ac.id/files/2015/03/jobexpo-low1.jpg");
+            detailEventData.setHostImg("https://udemy-images.udemy.com/user/200_H/23364412_337e.jpg");
+            detailEventData.setEventName("Binus Job Expo");
+            detailEventData.setHostedBy("Hosted By Bina Nusantara");
+            detailEventData.setDateResponse("October, 17 at 10.45 AM");
+            detailEventData.setLocation("Bina Nusantara, kampus Anggrek");
+            detailEventData.setCategory("Job");
+            detailEventData.setDescription("Event tahunan yang " +
+                    "diselenggarakan oleh Bina Nusantara untuk mahasiswa untuk mencari pekerjaan yang cocok untuk mereka");
+            detailEventData.setTotalPeople(80);
+        }
+        if(eventId.equals("three")){
+            detailEventData.setEventId("3");
+            detailEventData.setBackgroundImg("http://i.imgur.com/mo7fKqf.png");
+            detailEventData.setHostImg("https://udemy-images.udemy.com/user/200_H/23364412_337e.jpg");
+            detailEventData.setEventName("Helmy Yahya Goes To Campus");
+            detailEventData.setHostedBy("Hosted By Bina Nusantara");
+            detailEventData.setDateResponse("Today at 19.00");
+            detailEventData.setLocation("Bina Nusantara, kampus Anggrek");
+            detailEventData.setCategory("Enterpreneur");
+            detailEventData.setDescription("Seminar tentang enterpreneur yang akan dibawakan oleh Helmy Yahya");
             detailEventData.setTotalPeople(80);
         }
         fillDetailEvent(detailEventData);
     }
     private void fetchDataThreadDummy(){
         threadEventData = new ArrayList<ThreadModel>();
+
         ThreadModel threadData1 = new ThreadModel();
         threadData1.setHostedBy("Hans Sagita");
-        threadData1.setComments(5);
+        threadData1.setComments(2);
         threadData1.setEventId("one");
         threadData1.setHostImg("https://pbs.twimg.com/profile_images/477132899041296385/M-7XVG3B_400x400.jpeg");
-        threadData1.setLikes(10);
-        threadData1.setMessage("Do you think diko has neck?");
+        threadData1.setLikes(5);
+        threadData1.setMessage("Does anyone come from  Kelapa Gading ?");
         threadData1.setPostinganDate("One Hour Ago");
         threadData1.setThreadId("threadOne");
         threadEventData.add(threadData1);
 
         ThreadModel threadData2 = new ThreadModel();
         threadData2.setHostedBy("Yan Firdaus");
-        threadData2.setComments(6);
+        threadData2.setComments(1);
         threadData2.setEventId("two");
-        threadData2.setHostImg("https://pbs.twimg.com/profile_images/477132899041296385/M-7XVG3B_400x400.jpeg");
+        threadData2.setHostImg("https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAmXAAAAJGExNzQ4NWUwLTc4MzUtNDU1ZC1hMjk0LWVlNDVmZTNjNWY5Mg.jpg");
         threadData2.setLikes(20);
-        threadData2.setMessage("Do you think I'm wibu ?");
+        threadData2.setMessage("Harga tiket nya berapa ya kak ?");
         threadData2.setPostinganDate("Yesterday");
         threadData2.setThreadId("threadTwo");
         threadEventData.add(threadData2);
@@ -184,7 +197,7 @@ public class DetailEventPageActivity extends AppCompatActivity {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT, "Please Check " + detailEventData.getEventName()
-                + " Event in Eventku Application");
+                + " Event in " + detailEventData.getBackgroundImg());
         sendIntent.setType("text/plain");
         startActivity(sendIntent);
     }

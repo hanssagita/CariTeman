@@ -28,6 +28,7 @@ public class DetailEventThreadPageActivity extends AppCompatActivity {
     private CaviarTextView detailEventThreadHostedByName;
     private CaviarTextView detailEventThreadDate;
     private CaviarTextView detailEventThreadContent;
+    private CaviarTextView rsvpTextView;
     private RecyclerView recyclerView;
     private ThreadModel threadModel;
     private String threadId;
@@ -44,6 +45,7 @@ public class DetailEventThreadPageActivity extends AppCompatActivity {
         detailEventThreadHostedByName = (CaviarTextView)findViewById(R.id.detailEventThreadHostedByName);
         detailEventThreadDate = (CaviarTextView)findViewById(R.id.detailEventThreadDate);
         detailEventThreadContent = (CaviarTextView)findViewById(R.id.detailEventThreadContent);
+        rsvpTextView = (CaviarTextView)findViewById(R.id.rsvpTextView);
         recyclerView = (RecyclerView)findViewById(R.id.recViewDetailEventThreadComment);
         editTextCommentPost = (EditText)findViewById(R.id.editTextCommentPost);
 
@@ -101,27 +103,28 @@ public class DetailEventThreadPageActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(llm);
         fillListCommentDummy();
+
     }
     private void fetchDataDummyThread(){
         threadModel = new ThreadModel();
         if(threadId.equals("threadOne")){
             threadModel.setHostedBy("Hans Sagita");
-            threadModel.setComments(5);
+            threadModel.setComments(3);
             threadModel.setEventId("one");
             threadModel.setHostImg("https://pbs.twimg.com/profile_images/477132899041296385/M-7XVG3B_400x400.jpeg");
             threadModel.setLikes(10);
-            threadModel.setMessage("Do you think diko has neck?");
+            threadModel.setMessage("Does anyone come from  Kelapa Gading ?");
             threadModel.setPostinganDate("One Hour Ago");
             threadModel.setThreadId("threadOne");
             fillDataThread();
         }
         if(threadId.equals("threadTwo")){
             threadModel.setHostedBy("Yan Firdaus");
-            threadModel.setComments(6);
+            threadModel.setComments(3);
             threadModel.setEventId("two");
-            threadModel.setHostImg("https://pbs.twimg.com/profile_images/477132899041296385/M-7XVG3B_400x400.jpeg");
+            threadModel.setHostImg("https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAmXAAAAJGExNzQ4NWUwLTc4MzUtNDU1ZC1hMjk0LWVlNDVmZTNjNWY5Mg.jpg");
             threadModel.setLikes(20);
-            threadModel.setMessage("Do you think I'm wibu ?");
+            threadModel.setMessage("Harga tiket nya berapa ya kak ?");
             threadModel.setPostinganDate("Yesterday");
             threadModel.setThreadId("threadTwo");
             fillDataThread();
@@ -137,21 +140,21 @@ public class DetailEventThreadPageActivity extends AppCompatActivity {
         if(threadId.equals("threadOne")){
             CommentModel commentModel1 = new CommentModel();
             commentModel1.setThreadId("threadOne");
-            commentModel1.setCommentContent("Yes I Agree");
+            commentModel1.setCommentContent("I'm come from Kelapa Gading Hans.");
             commentModel1.setCommentDate("October 11 at 10.30 AM");
             commentModel1.setEventId("one");
-            commentModel1.setHostedBy("Hans Sagita");
-            commentModel1.setHostImg("https://pbs.twimg.com/profile_images/477132899041296385/M-7XVG3B_400x400.jpeg");
+            commentModel1.setHostedBy("Diko Raditya");
+            commentModel1.setHostImg("https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAlYAAAAJDVkNTVlOTgyLWE3ZGQtNDEzNi1hNjhkLWZlYTRhZDdhMTA5OA.jpg");
             commentModel1.setLikes(1);
             commentModel1.setMemberId("memberOne");
             commentModelList.add(commentModel1);
             CommentModel commentModel2 = new CommentModel();
             commentModel2.setThreadId("threadOne");
-            commentModel2.setCommentContent("Yes I Not Agree");
+            commentModel2.setCommentContent("Me too, wanna join ?");
             commentModel2.setCommentDate("October 11 at 10.30 AM");
             commentModel2.setEventId("one");
-            commentModel2.setHostedBy("Hans Sagita");
-            commentModel2.setHostImg("https://pbs.twimg.com/profile_images/477132899041296385/M-7XVG3B_400x400.jpeg");
+            commentModel2.setHostedBy("Jevon Averill");
+            commentModel2.setHostImg("http://jevonave.azurewebsites.net/img/jevonaverillbinus.jpg");
             commentModel2.setLikes(2);
             commentModel2.setMemberId("memberOne");
             commentModelList.add(commentModel2);
@@ -161,21 +164,11 @@ public class DetailEventThreadPageActivity extends AppCompatActivity {
             commentModel1.setCommentContent("Yes I Agree Test");
             commentModel1.setCommentDate("October 11 at 10.30 AM");
             commentModel1.setEventId("one");
-            commentModel1.setHostedBy("Hans Sagita");
-            commentModel1.setHostImg("https://pbs.twimg.com/profile_images/477132899041296385/M-7XVG3B_400x400.jpeg");
+            commentModel1.setHostedBy("Bina Nusantara Admin");
+            commentModel1.setHostImg("https://udemy-images.udemy.com/user/200_H/23364412_337e.jpg");
             commentModel1.setLikes(1);
             commentModel1.setMemberId("memberOne");
             commentModelList.add(commentModel1);
-            CommentModel commentModel2 = new CommentModel();
-            commentModel2.setThreadId("threadTwo");
-            commentModel2.setCommentContent("Yes I Not Agree Test");
-            commentModel2.setCommentDate("October 11 at 10.30 AM");
-            commentModel2.setEventId("one");
-            commentModel2.setHostedBy("Hans Sagita");
-            commentModel2.setHostImg("https://pbs.twimg.com/profile_images/477132899041296385/M-7XVG3B_400x400.jpeg");
-            commentModel2.setLikes(2);
-            commentModel2.setMemberId("memberOne");
-            commentModelList.add(commentModel2);
         }
             commentAdapter = new CommentAdapter(commentModelList, getBaseContext());
             recyclerView.setAdapter(commentAdapter);
