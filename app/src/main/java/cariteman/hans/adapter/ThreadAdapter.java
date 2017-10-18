@@ -47,7 +47,12 @@ public class ThreadAdapter extends RecyclerView.Adapter<ThreadAdapter.ViewHolder
         holder.threadCardMemberName.setText(oneThread.getHostedBy());
         holder.threadCardDateCreate.setText(oneThread.getPostinganDate());
         holder.threadCardContent.setText(oneThread.getMessage());
-        holder.eventDetailTotalLike.setText(oneThread.getLikes().toString());
+
+        if(oneThread.getLikes()==0){
+            holder.eventDetailTotalLike.setText("");
+        }else{
+            holder.eventDetailTotalLike.setText(oneThread.getLikes().toString());
+        }
         holder.eventDetailTotalComment.setText(oneThread.getComments().toString());
 
         holder.likeIconInThreadOneCard.setOnClickListener(new View.OnClickListener() {

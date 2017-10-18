@@ -30,6 +30,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private EditText editTextFullName;
     private EditText editTextAddress;
     private EditText editTextPhoneNumber;
+    private EditText editTextStudentId;
     private FirebaseAuth mAuth;
     private FirebaseDatabase mRootRef = FirebaseDatabase.getInstance();
     private DatabaseReference mUserRef = mRootRef.getReference().child("users");
@@ -37,6 +38,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private String fullName;
     private String address;
     private String phoneNumber;
+    private String studentId;
     private ImageView ivPhoto;
     private AnimationDrawable animationDrawable;
     private RelativeLayout relativeLayout;
@@ -56,6 +58,7 @@ public class EditProfileActivity extends AppCompatActivity {
         editTextFullName = (EditText) findViewById(R.id.editTextFullNameRegister);
         editTextAddress = (EditText) findViewById(R.id.editTextAddressRegister);
         editTextPhoneNumber = (EditText) findViewById(R.id.editTextPhoneNumberRegister);
+        editTextStudentId = (EditText) findViewById(R.id.editTextStudentId);
         ivPhoto = (ImageView) findViewById(R.id.ivPhoto);
 
         Glide.with(EditProfileActivity.this)
@@ -75,6 +78,7 @@ public class EditProfileActivity extends AppCompatActivity {
                             editTextFullName.setText(user.getDisplayName());
                             editTextAddress.setText(user.getAddress());
                             editTextPhoneNumber.setText(user.getPhoneNumber());
+                            editTextPhoneNumber.setText(user.getStudentId());
                         }
                     }
                 }
@@ -96,8 +100,9 @@ public class EditProfileActivity extends AppCompatActivity {
                 fullName = editTextFullName.getText().toString().trim();
                 address = editTextAddress.getText().toString().trim();
                 phoneNumber = editTextPhoneNumber.getText().toString().trim();
+                studentId = editTextStudentId.getText().toString().trim();
                 User user = new User(email, address, fullName, phoneNumber,
-                        "https://pbs.twimg.com/profile_images/477132899041296385/M-7XVG3B_400x400.jpeg");
+                        "https://pbs.twimg.com/profile_images/477132899041296385/M-7XVG3B_400x400.jpeg", studentId);
                 mUserRef.child(mAuth.getCurrentUser().getUid()).setValue(user);
                 Toast.makeText(getApplicationContext(), "Edit Success", Toast.LENGTH_SHORT).show();
             }

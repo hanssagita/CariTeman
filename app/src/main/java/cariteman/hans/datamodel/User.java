@@ -17,6 +17,15 @@ public class User {
     private String displayName;
     private String phoneNumber;
     private String photoURL;
+    private String studentId;
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
 
     public String getPhotoURL() {
         return photoURL;
@@ -50,12 +59,13 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public User(String email, String address, String displayName, String phoneNumber, String photoURL) {
+    public User(String email, String address, String displayName, String phoneNumber, String photoURL, String studentId) {
         this.email = email;
         this.address = address;
         this.displayName = displayName;
         this.phoneNumber = phoneNumber;
         this.photoURL = photoURL;
+        this.studentId = studentId;
     }
 
     public User() {

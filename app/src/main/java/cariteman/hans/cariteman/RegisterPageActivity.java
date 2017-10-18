@@ -28,6 +28,7 @@ public class RegisterPageActivity extends AppCompatActivity {
     private EditText editTextFullNameRegister;
     private EditText editTextAddressRegister;
     private EditText editTextPhoneNumberRegister;
+    private EditText editTextStudentIdRegister;
     private FirebaseAuth mAuth;
     private FirebaseDatabase mRootRef = FirebaseDatabase.getInstance();
     private DatabaseReference mUserRef = mRootRef.getReference().child("users");
@@ -36,6 +37,7 @@ public class RegisterPageActivity extends AppCompatActivity {
     private String fullName;
     private String address;
     private String phoneNumber;
+    private String studentId;
     private AnimationDrawable animationDrawable;
     private RelativeLayout relativeLayout;
 
@@ -55,6 +57,7 @@ public class RegisterPageActivity extends AppCompatActivity {
         editTextFullNameRegister = (EditText)findViewById(R.id.editTextFullNameRegister);
         editTextAddressRegister = (EditText)findViewById(R.id.editTextAddressRegister);
         editTextPhoneNumberRegister = (EditText)findViewById(R.id.editTextPhoneNumberRegister);
+        editTextStudentIdRegister = (EditText)findViewById(R.id.editTextStudentIdRegister);
         mAuth = FirebaseAuth.getInstance();
 
         buttonRegister.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +69,7 @@ public class RegisterPageActivity extends AppCompatActivity {
                 fullName = editTextFullNameRegister.getText().toString().trim();
                 address = editTextAddressRegister.getText().toString().trim();
                 phoneNumber = editTextPhoneNumberRegister.getText().toString().trim();
+                studentId = editTextStudentIdRegister.getText().toString().trim();
 
                 if(!email.isEmpty() && !password.isEmpty()) {
                     mAuth.createUserWithEmailAndPassword(email, password)
@@ -75,7 +79,7 @@ public class RegisterPageActivity extends AppCompatActivity {
 
                                     //Todo Disini bakal di buat post request data user ke backend buat di save data di backend
                                     User user = new User(email, address, fullName, phoneNumber,
-                                            "https://pbs.twimg.com/profile_images/477132899041296385/M-7XVG3B_400x400.jpeg");
+                                            "https://pbs.twimg.com/profile_images/477132899041296385/M-7XVG3B_400x400.jpeg",studentId);
                                     mUserRef.child(mUserRef.push().getKey())
                                             .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
@@ -101,13 +105,6 @@ public class RegisterPageActivity extends AppCompatActivity {
         });
     }
 
-    private String usernameFromEmail(String email) {
-        if (email.contains("@")) {
-            return email.split("@")[0];
-        } else {
-            return email;
-        }
-    }
 
     @Override
     protected void onStart() {

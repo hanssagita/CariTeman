@@ -70,10 +70,32 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayoutStudentId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textInputLayoutFullNameRegister"
+                android:layout_marginTop="20dp">
+
+                <EditText
+                    android:id="@+id/editTextStudentId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="50dp"
+                    android:background="@drawable/rounded_corner_edit_text"
+                    android:ems="10"
+                    android:hint="StudentId"
+                    android:inputType="textPersonName"
+                    android:padding="10dp"
+                    android:textSize="18sp" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
                 android:id="@+id/textInputLayoutAddressRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textInputLayoutFullNameRegister"
+                android:layout_below="@id/textInputLayoutStudentId"
                 android:layout_marginTop="20dp">
 
                 <EditText

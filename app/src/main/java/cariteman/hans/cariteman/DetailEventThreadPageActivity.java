@@ -4,10 +4,16 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import cariteman.hans.adapter.CommentAdapter;
@@ -26,7 +32,9 @@ public class DetailEventThreadPageActivity extends AppCompatActivity {
     private ThreadModel threadModel;
     private String threadId;
     private CommentAdapter commentAdapter;
-    private List<CommentModel> commentModelList;
+    private List<CommentModel> commentModelList  = new ArrayList<>();;
+    private EditText editTextCommentPost;
+    private String newComment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +45,41 @@ public class DetailEventThreadPageActivity extends AppCompatActivity {
         detailEventThreadDate = (CaviarTextView)findViewById(R.id.detailEventThreadDate);
         detailEventThreadContent = (CaviarTextView)findViewById(R.id.detailEventThreadContent);
         recyclerView = (RecyclerView)findViewById(R.id.recViewDetailEventThreadComment);
+        editTextCommentPost = (EditText)findViewById(R.id.editTextCommentPost);
+
+        editTextCommentPost.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN)
+                {
+                    switch (keyCode)
+                    {
+                        case KeyEvent.KEYCODE_DPAD_CENTER:
+                        case KeyEvent.KEYCODE_ENTER:
+                            newComment = editTextCommentPost.getText().toString().trim();
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MMM d hh:mm a");
+                            CommentModel commentModelNew = new CommentModel();
+                            commentModelNew.setThreadId("threadNew");
+                            commentModelNew.setCommentContent(newComment);
+                            commentModelNew.setCommentDate(dateFormat.format(new Date()));
+                            commentModelNew.setEventId("one");
+                            commentModelNew.setHostedBy("Hans Sagita");
+                            commentModelNew.setHostImg("https://pbs.twimg.com/profile_images/477132899041296385/M-7XVG3B_400x400.jpeg");
+                            commentModelNew.setLikes(0);
+                            commentModelNew.setMemberId("memberOne");
+                            commentModelList.add(commentModelNew);
+                            commentAdapter = new CommentAdapter(commentModelList, getBaseContext());
+                            recyclerView.setAdapter(commentAdapter);
+                            editTextCommentPost.setText("");
+                            Toast.makeText(DetailEventThreadPageActivity.this, "Success Post Comment", Toast.LENGTH_SHORT).show();
+                            return true;
+                        default:
+                            break;
+                    }
+                }
+                return false;
+            }
+        });
 
 
         if (savedInstanceState == null) {
@@ -91,7 +134,6 @@ public class DetailEventThreadPageActivity extends AppCompatActivity {
         detailEventThreadContent.setText(threadModel.getMessage());
     }
     private void fillListCommentDummy(){
-        commentModelList = new ArrayList<>();
         if(threadId.equals("threadOne")){
             CommentModel commentModel1 = new CommentModel();
             commentModel1.setThreadId("threadOne");
