@@ -13,17 +13,13 @@
             android:icon="@drawable/my_event"
             android:title="My Event" />
         <item
-            android:id="@+id/nav_profile"
-            android:icon="@drawable/my_event"
-            android:title="Profile" />
-        <item
             android:id="@+id/nav_edit_profile"
             android:icon="@drawable/ic_menu_manage"
             android:title="Edit Profile"/>
         <item
             android:id="@+id/nav_create_event"
             android:icon="@drawable/create_event"
-            android:title="Create Event" />
+            android:title="Request Event" />
     </group>
 
     <item android:title="Settings">

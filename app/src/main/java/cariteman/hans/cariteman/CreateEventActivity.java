@@ -187,6 +187,7 @@ public class CreateEventActivity extends AppCompatActivity implements
                 eventData.put("eventDate", timestampEventDate);
                 eventData.put("eventDescription", eventDescription);
                 eventData.put("eventLocation", eventLocation);
+                eventData.put("isVerified", false);
                 eventData.put("backgroundImageURL", backgroundImageURL);
 
                 // TODO: call api createEvent / save to Cloud Firestore
