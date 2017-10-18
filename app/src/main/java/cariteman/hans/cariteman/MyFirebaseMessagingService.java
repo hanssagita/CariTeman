@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
@@ -19,9 +21,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MMM d hh:mm a");
 
+    private SimpleDateFormat datetimeFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         // String notificationTitle = null, notificationBody = null;
+
+        SimpleDateFormat sdfDay = new SimpleDateFormat("EEEE");
+        SimpleDateFormat sdfMonth = new SimpleDateFormat("MMMM");
+//        newEvent.setDateResponse(sdfDay.format(eventDate) + ", "+ sdfMonth.format(eventDate) + " "
 
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
@@ -36,11 +44,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
-//            pushNotification("Welcome new user!",
-//                    remoteMessage.getData().get("email") + " | " + remoteMessage.getData().get("name"));
-            pushNotification(remoteMessage.getData().get("name"),
-                    remoteMessage.getData().get("category") + " at " +
-                            remoteMessage.getData().get("location"));
+            try {
+                pushNotification(remoteMessage.getData().get("name") + " - " + remoteMessage.getData().get("category"),
+                        "at " +
+                                remoteMessage.getData().get("location") + " on " +
+                                dateFormat.format(datetimeFormat.parse(remoteMessage.getData().get("date"))));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 //                            remoteMessage.getData().get("date"));
         }
     }

@@ -34,11 +34,6 @@
             android:name=".SplashScreenActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".ProfileActivity"
-            android:exported="false"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".EditProfileActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity" />
